@@ -2,6 +2,35 @@ import os
 import sqlite3
 import tkinter as tk
 import tkinter.messagebox
+from tkinter import messagebox
+
+class MainMenu(tk.Tk):
+    def __init__(self):
+        super().__init__()
+        self.title("Main Menu")
+        self.geometry("200x150")
+        
+        self.root_label = tk.Label(text="Select root:")
+        self.root_label.pack()
+        
+        self.root_options = [2, 3, 4, 5, 6, 7, 8, 9, 10]
+        self.root_var = tk.IntVar()
+        self.root_var.set(self.root_options[0])
+        
+        for root in self.root_options:
+            tk.Radiobutton(text=str(root), variable=self.root_var, value=root).pack()
+        
+        self.open_button = tk.Button(text="Open", command=self.open_interface)
+        self.open_button.pack()
+        
+    def open_interface(self):
+        root = self.root_var.get()
+        messagebox.showinfo("Selected root", f"The selected root is {root}")
+        
+if __name__ == "__main__":
+    app = MainMenu()
+    app.mainloop()
+
 
 conn = sqlite3.connect("C:\\Users\\inspe\\Desktop\\Qualidade\\Projetos py\\os.db", timeout=10)
 
@@ -38,7 +67,7 @@ def save_data():
             c = conn.cursor()
 
             c.execute("INSERT INTO tb_OS (COD_OS, DESC_OS, ORIG_OS, RESP_OS, TIPO_OS, EQUIP_OS, SETOR_OS, INFOS_OS) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
-                  (cod_os, desc_os, orig_os, resp_os, tipo_os, equip_os, setor_os, infos_os))
+                      (cod_os, desc_os, orig_os, resp_os, tipo_os, equip_os, setor_os, infos_os))
             conn.commit() 
             entry2.delete(0, 'end')
             entry3.delete(0, 'end')
@@ -58,6 +87,7 @@ def cancelar():
     print("Janela fechada")
 
 #Cria o Menu de cadastro
+
 root = tk.Tk()
 root.title("Cadastro de O.S")
 
