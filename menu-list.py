@@ -39,6 +39,7 @@ def save_data():
 
             c.execute("INSERT INTO tb_OS (COD_OS, DESC_OS, ORIG_OS, RESP_OS, TIPO_OS, EQUIP_OS, SETOR_OS, INFOS_OS) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
                   (cod_os, desc_os, orig_os, resp_os, tipo_os, equip_os, setor_os, infos_os))
+            conn.commit() 
             entry2.delete(0, 'end')
             entry3.delete(0, 'end')
             entry4.delete(0, 'end')
@@ -46,8 +47,11 @@ def save_data():
             entry6.delete(0, 'end')
             entry7.delete(0, 'end')
             entry8.delete(0, 'end')
+            entry1.delete(0, 'end')
+            entry1.insert(0, str(get_last_code()).zfill(3))
             os.system("cls")
             print("Informações inseridas!")
+    return True    
 
 def cancelar():
     root.destroy()
@@ -62,7 +66,6 @@ label1.grid(row=0, column=0, padx=10, pady=10)
 
 entry1 = tk.Entry(root)
 entry1.insert(0, str(get_last_code()).zfill(3))
-entry1.config(state='readonly')
 entry1.grid(row=0, column=1, padx=10, pady=10)
 
 label2 = tk.Label(root, text="Descrição da O.S")
@@ -114,4 +117,5 @@ cancel_button = tk.Button(root, text="Cancelar", command=cancelar)
 cancel_button.grid(row=9, column=2, columnspan=4, padx=10, pady=10)
 
 root.mainloop()
+
 conn.close()
