@@ -6,7 +6,7 @@ import os
 def option_1_interface():
     cad_os = tk.Toplevel()
     cad_os.title("Option 1")
-    cad_os.geometry("500x300")
+    cad_os.geometry("800x500")
     def get_last_code():
         with sqlite3.connect("C:\\Users\\inspe\\Desktop\\Qualidade\\Projetos py\\os.db") as conn:
             c = conn.cursor()
@@ -135,13 +135,13 @@ def main():
     main_menu.title("Main Menu")
     main_menu.geometry("200x150")
     
-    option_1_button = tk.Button(main_menu, text="Option 1", command=option_1_interface)
+    option_1_button = tk.Button(main_menu, text="Cadastro de O.S", command=option_1_interface)
     option_1_button.pack()
     
-    option_2_button = tk.Button(main_menu, text="Option 2", command=option_2_interface)
+    option_2_button = tk.Button(main_menu, text="Cadastro de S.S", command=option_2_interface)
     option_2_button.pack()
     
-    option_3_button = tk.Button(main_menu, text="Option 3", command=option_3_interface)
+    option_3_button = tk.Button(main_menu, text="Cadastro de Equipamentos", command=option_3_interface)
     option_3_button.pack()
     
     main_menu.mainloop()
