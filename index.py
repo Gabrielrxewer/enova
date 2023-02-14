@@ -193,7 +193,7 @@ def cad_ss():
 def cad_eqp():
     cad_eq = tk.Toplevel()
     cad_eq.title("Cadastro de Equipamentos")
-    cad_eq.geometry("200x100")
+    cad_eq.geometry("800x500")
     cad_eq.config(bg='#202020')
     cad_eq.iconbitmap(default=icon)
     
@@ -218,17 +218,41 @@ def cad_eqp():
 def cad_pcs():
     cad_pc = tk.Toplevel()
     cad_pc.title("Cadastro de Peças")
-    cad_pc.geometry("200x100")
+    cad_pc.geometry("800x500")
     cad_pc.config(bg='#202020')
     cad_pc.iconbitmap(default=icon)
     
     #Impressão da interface
 
-    label_1 = tk.Label(cad_pc, text="This is label 1 in Option 3")
-    label_1.grid(row=1, column=0, padx=10, pady=10)
+    lpc1 = tk.Label(cad_pc, text="Codigo")
+    lpc1.grid(row=1, column=0, padx=10, pady=10)
+
+    epc1 = tk.Entry(cad_pc, width=40)
+    epc1.grid(row=1, column=1, padx=10, pady=10)
+
+    lcp2 = tk.Label(cad_pc, text="Descrição")
+    lcp2.grid(row=2, column=0, padx=10, pady=10)
+
+    epc2 = tk.Entry(cad_pc, width=40)
+    epc2.grid(row=2, column=1, padx=10, pady=10)
+
+    lpc3 = tk.Label(cad_pc, text="Preço")
+    lpc3.grid(row=3, column=0, padx=10, pady=10)
     
-    label_2 = tk.Label(cad_pc, text="This is label 2 in Option 3")
-    label_2.grid(row=2, column=0, padx=10, pady=10)
+    epc3= tk.Entry(cad_pc, width=40)
+    epc3.grid(row=3, column=1, padx=10, pady=10)
+
+    lpc4 = tk.Label(cad_pc, text="Estoque")
+    lpc4.grid(row=4, column=0, padx=10, pady=10)
+
+    epc4 = tk.Entry(cad_pc, width=40)
+    epc4.grid(row=4, column=1, padx=10, pady=10)
+
+    lpc5 = tk.Label(cad_pc, text="Informações adicionais")
+    lpc5.grid(row=5, column=0, padx=10, pady=10)
+
+    epc5 = tk.Entry(cad_pc, width=40)
+    epc5.grid(row=5, column=1, padx=10, pady=10)
 
     #Função para gerar a interface do Menu
 
@@ -237,7 +261,7 @@ def cad_pcs():
 def cad_fun():
     cad_f = tk.Toplevel()
     cad_f.title("Cadastro de Funcionários")
-    cad_f.geometry("200x100")
+    cad_f.geometry("800x500")
     cad_f.config(bg='#202020')
     cad_f.iconbitmap(default=icon)
     
@@ -247,34 +271,46 @@ def cad_fun():
     lfun1.grid(row=1, column=0, padx=10, pady=10)
 
     efun1 = tk.Entry(cad_f, width=40)
-    efun1.grid(row=2, column=1, padx=10, pady=10)
+    efun1.grid(row=1, column=1, padx=10, pady=10)
     
     lfun2 = tk.Label(cad_f, text="Nome do Funcionário")
     lfun2.grid(row=2, column=0, padx=10, pady=10)
 
+    efun2 = tk.Entry(cad_f, width=40)
+    efun2.grid(row=2, column=1, padx=10, pady=10)
+
     lfun3 = tk.Label(cad_f, text="Setor do Funcionário")
-    lfun3.grid(row=2, column=0, padx=10, pady=10)
+    lfun3.grid(row=3, column=0, padx=10, pady=10)
+
+    efun3 = tk.Entry(cad_f, width=40)
+    efun3.grid(row=3, column=1, padx=10, pady=10)
 
     #Função para gerar a interface do Menu
 
-    #Função que gera a interface do cadastro de peças
+    #Função que gera a interface do cadastro de setores
 
 def cad_set():
     cad_se = tk.Toplevel()
     cad_se.title("Cadastro de Setores")
-    cad_se.geometry("200x100")
+    cad_se.geometry("800x500")
     cad_se.config(bg='#202020')
     cad_se.iconbitmap(default=icon) 
 
     #Impressão da interface
 
-    label_1 = tk.Label(cad_se, text="Código do Setor")
-    label_1.grid(row=1, column=0, padx=10, pady=10)
-    
-    label_2 = tk.Label(cad_se, text="Nome do Setor")
-    label_2.grid(row=2, column=0, padx=10, pady=10)
+    lset1 = tk.Label(cad_se, text="Código do Setor")
+    lset1.grid(row=1, column=0, padx=10, pady=10)
 
-    #Função para gerar a interface do Menu
+    eset1 = tk.Entry(cad_se, width=40)
+    eset1.grid(row=1, column=1, padx=10, pady=10)
+
+    lset2 = tk.Label(cad_se, text="Nome do Setor")
+    lset2.grid(row=2, column=0, padx=10, pady=10)
+
+    eset2 = tk.Entry(cad_se, width=40)
+    eset2.grid(row=2, column=1, padx=10, pady=10)
+
+    #Função para gerar a interface do Menu principal
 
 def main():
     main_menu = tk.Tk()
