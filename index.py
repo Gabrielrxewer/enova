@@ -1,5 +1,11 @@
-###  Copyright (c) [2023] [Gabriel-Roewer-Pilger]  
-###   Version (1.1) Updated in [14.02.2023]
+##----------------------------------------------------##
+
+###  Copyright (c) [2023] [Gabriel-Roewer-Pilger]    ###
+###   Version (1.1) Updated in [14.02.2023]          ###    
+
+##----------------------------------------------------##
+
+#Bibliotecas necessárias para execução do código
 
 import tkinter as tk
 import sqlite3
@@ -12,6 +18,9 @@ def cad_os():
     cad_os = tk.Toplevel()
     cad_os.title("Cadastro de O.S")
     cad_os.geometry("800x500")
+    
+    #Função para conferir o último Código da O.S no banco de dados e definir o próximo código
+    
     def get_last_code():
         with sqlite3.connect("C:\\Users\\inspe\\Desktop\\Qualidade\\Projetos py\\os.db") as conn:
             c = conn.cursor()
@@ -22,7 +31,6 @@ def cad_os():
                 last_code = last_code[0]
             else:
                 last_code = 0
-
             new_code = int(last_code) + 1
             return new_code
     
@@ -37,6 +45,9 @@ def cad_os():
         equip_os = eos6.get()
         setor_os = eos7.get()
         infos_os = eos8.get()
+
+        #Condição que verifica se os campos obrigatórios estão preenchidos
+
         if eos2.get() == "" or eos3.get() == "" or eos4.get() == "" or eos5.get() == "" or eos6.get() == "" or eos7.get() == "" or eos8.get() == "":
             tkinter.messagebox.showerror("Erro!", "Todos os campos precisam ser preenchidos!")
         else:
@@ -67,7 +78,7 @@ def cad_os():
         cad_os.destroy()
         print("Janela fechada")
 
-    #Impressão da interface
+    #Impressão da interface 
 
     los1 = tk.Label(cad_os, text="Código da O.S")
     los1.grid(row=0, column=0, padx=70, pady=10)
