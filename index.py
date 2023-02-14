@@ -12,12 +12,18 @@ import sqlite3
 import tkinter.messagebox
 import os
 
+#Variaveis de entrada
+
+icon="C:\\Users\\inspe\\Desktop\\Qualidade\\Projetos py\\enova.ico"
+
 #Função que gera a interface do Cadastro de O.S
 
 def cad_os():
     cad_os = tk.Toplevel()
     cad_os.title("Cadastro de O.S")
     cad_os.geometry("800x500")
+    cad_os.config(bg='#202020')
+    cad_os.iconbitmap(default=icon)
     
     #Função para conferir o último Código da O.S no banco de dados e definir o próximo código
     
@@ -83,50 +89,50 @@ def cad_os():
     los1 = tk.Label(cad_os, text="Código da O.S")
     los1.grid(row=0, column=0, padx=70, pady=10)
 
-    eos1 = tk.Entry(cad_os)
+    eos1 = tk.Entry(cad_os, width=40)
     eos1.insert(0, str(get_last_code()).zfill(3))
     eos1.grid(row=0, column=1, padx=10, pady=10)
 
     los2 = tk.Label(cad_os, text="Descrição da O.S")
     los2.grid(row=1, column=0, padx=10, pady=10)
 
-    eos2 = tk.Entry(cad_os)
+    eos2 = tk.Entry(cad_os, width=40)
     eos2.grid(row=1, column=1, padx=10, pady=10)
 
     los3 = tk.Label(cad_os, text="Origem O.S")
     los3.grid(row=2, column=0, padx=10, pady=10)
 
-    eos3 = tk.Entry(cad_os)
+    eos3 = tk.Entry(cad_os, width=40)
     eos3.grid(row=2, column=1, padx=10, pady=10)
 
     los4 = tk.Label(cad_os, text="Responsável pela O.S")
     los4.grid(row=3, column=0, padx=10, pady=10)
 
-    eos4 = tk.Entry(cad_os)
+    eos4 = tk.Entry(cad_os, width=40)
     eos4.grid(row=3, column=1, padx=10, pady=10)
 
     los5 = tk.Label(cad_os, text="Tipo da O.S")
     los5.grid(row=4, column=0, padx=10, pady=10)
 
-    eos5 = tk.Entry(cad_os)
+    eos5 = tk.Entry(cad_os, width=40)
     eos5.grid(row=4, column=1, padx=10, pady=10)
 
     los6 = tk.Label(cad_os, text="Equipamento")
     los6.grid(row=5, column=0, padx=10, pady=10)
 
-    eos6 = tk.Entry(cad_os)
+    eos6 = tk.Entry(cad_os, width=40)
     eos6.grid(row=5, column=1, padx=10, pady=10)
 
     los7 = tk.Label(cad_os, text="Setor")
     los7.grid(row=6, column=0, padx=10, pady=10)
 
-    eos7 = tk.Entry(cad_os)
+    eos7 = tk.Entry(cad_os, width=40)
     eos7.grid(row=6, column=1, padx=10, pady=10)
 
     los8 = tk.Label(cad_os, text="Informações")
     los8.grid(row=7, column=0, padx=10, pady=10)
 
-    eos8 = tk.Entry(cad_os)
+    eos8 = tk.Entry(cad_os, width=40)
     eos8.grid(row=7, column=1, padx=10, pady=10)
 
     save_button = tk.Button(cad_os, text="Gerar O.S", command=save_data)
@@ -141,6 +147,8 @@ def cad_ss():
     cad_ss = tk.Toplevel()
     cad_ss.title("Cadastro de SS")
     cad_ss.geometry("800x500")
+    cad_ss.config(bg='#202020')
+    cad_ss.iconbitmap(default=icon)
     
     #Impressão da interface
 
@@ -183,16 +191,87 @@ def cad_ss():
     #Função que gera a interface do cadastro de peças
 
 def cad_eqp():
-    option_3 = tk.Toplevel()
-    option_3.title("Cadastro de Peças")
-    option_3.geometry("200x100")
+    cad_eq = tk.Toplevel()
+    cad_eq.title("Cadastro de Equipamentos")
+    cad_eq.geometry("200x100")
+    cad_eq.config(bg='#202020')
+    cad_eq.iconbitmap(default=icon)
     
     #Impressão da interface
 
-    label_1 = tk.Label(option_3, text="This is label 1 in Option 3")
+    leqp1 = tk.Label(cad_eq, text="Código")
+    leqp1.grid(row=1, column=0, padx=10, pady=10)
+
+    eeqp1 = tk.Entry(cad_eq, width=40)
+    eeqp1.grid(row=1, column=1, padx=10, pady=10)
+    
+    leqp2 = tk.Label(cad_eq, text="Descrição")
+    leqp2.grid(row=2, column=0, padx=10, pady=10)
+
+    eeqp2 = tk.Entry(cad_eq, width=40)
+    eeqp2.grid(row=2, column=1, padx=10, pady=10)
+
+    #Função para gerar a interface do Menu
+
+    #Função que gera a interface do cadastro de peças
+
+def cad_pcs():
+    cad_pc = tk.Toplevel()
+    cad_pc.title("Cadastro de Peças")
+    cad_pc.geometry("200x100")
+    cad_pc.config(bg='#202020')
+    cad_pc.iconbitmap(default=icon)
+    
+    #Impressão da interface
+
+    label_1 = tk.Label(cad_pc, text="This is label 1 in Option 3")
     label_1.grid(row=1, column=0, padx=10, pady=10)
     
-    label_2 = tk.Label(option_3, text="This is label 2 in Option 3")
+    label_2 = tk.Label(cad_pc, text="This is label 2 in Option 3")
+    label_2.grid(row=2, column=0, padx=10, pady=10)
+
+    #Função para gerar a interface do Menu
+
+    #Função que gera a interface do cadastro de peças
+
+def cad_fun():
+    cad_f = tk.Toplevel()
+    cad_f.title("Cadastro de Funcionários")
+    cad_f.geometry("200x100")
+    cad_f.config(bg='#202020')
+    cad_f.iconbitmap(default=icon)
+    
+    #Impressão da interface
+
+    lfun1 = tk.Label(cad_f, text="Código do Funcionário")
+    lfun1.grid(row=1, column=0, padx=10, pady=10)
+
+    efun1 = tk.Entry(cad_f, width=40)
+    efun1.grid(row=2, column=1, padx=10, pady=10)
+    
+    lfun2 = tk.Label(cad_f, text="Nome do Funcionário")
+    lfun2.grid(row=2, column=0, padx=10, pady=10)
+
+    lfun3 = tk.Label(cad_f, text="Setor do Funcionário")
+    lfun3.grid(row=2, column=0, padx=10, pady=10)
+
+    #Função para gerar a interface do Menu
+
+    #Função que gera a interface do cadastro de peças
+
+def cad_set():
+    cad_se = tk.Toplevel()
+    cad_se.title("Cadastro de Setores")
+    cad_se.geometry("200x100")
+    cad_se.config(bg='#202020')
+    cad_se.iconbitmap(default=icon) 
+
+    #Impressão da interface
+
+    label_1 = tk.Label(cad_se, text="Código do Setor")
+    label_1.grid(row=1, column=0, padx=10, pady=10)
+    
+    label_2 = tk.Label(cad_se, text="Nome do Setor")
     label_2.grid(row=2, column=0, padx=10, pady=10)
 
     #Função para gerar a interface do Menu
@@ -200,18 +279,29 @@ def cad_eqp():
 def main():
     main_menu = tk.Tk()
     main_menu.title("Menu-Cadastros")
-    main_menu.geometry("400x300")
+    main_menu.geometry("170x400")
+    main_menu.iconbitmap(default=icon)
+    main_menu.config(bg='#202020')
     
     #Botões de acesso ás demais aplicações
 
     c_os = tk.Button(main_menu, text="Cadastro de O.S", command=cad_os)
-    c_os.grid(row=1, column=1, padx=120, pady=10)
+    c_os.grid(row=1, column=1, padx=10, pady=10)
     
     c_ss = tk.Button(main_menu, text="Cadastro de S.S", command=cad_ss)
-    c_ss.grid(row=2, column=1, padx=120, pady=10)
+    c_ss.grid(row=2, column=1, padx=10, pady=10)
     
     c_eqp = tk.Button(main_menu, text="Cadastro de Equipamentos", command=cad_eqp)
-    c_eqp.grid(row=3, column=1, padx=120, pady=10)
+    c_eqp.grid(row=3, column=1, padx=10, pady=10)
+
+    c_pcs = tk.Button(main_menu, text="Cadastro de Peças", command=cad_pcs)
+    c_pcs.grid(row=4, column=1, padx=10, pady=10)
+
+    c_fun = tk.Button(main_menu, text="Cadastro de Funcionários", command=cad_fun)
+    c_fun.grid(row=5, column=1, padx=10, pady=10)
+
+    c_set = tk.Button(main_menu, text="Cadastro de Setores", command=cad_set)
+    c_set.grid(row=6, column=1, padx=10, pady=10)
     
     #Função para fechar a interface
 
@@ -222,7 +312,7 @@ def main():
     #Botão para fechar a interface
 
     c_left = tk.Button(main_menu, text="Sair", command=cancel_menu)
-    c_left.grid(row=4, column=1, padx=10, pady=90)
+    c_left.grid(row=7, column=1, padx=10, pady=70)
     
     main_menu.mainloop()
 
