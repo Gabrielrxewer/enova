@@ -5,7 +5,7 @@ import os
 
 def option_1_interface():
     cad_os = tk.Toplevel()
-    cad_os.title("Option 1")
+    cad_os.title("Cadastro de O.S")
     cad_os.geometry("800x500")
     def get_last_code():
         with sqlite3.connect("C:\\Users\\inspe\\Desktop\\Qualidade\\Projetos py\\os.db") as conn:
@@ -110,7 +110,7 @@ def option_1_interface():
 
 def option_2_interface():
     option_2 = tk.Toplevel()
-    option_2.title("Option 2")
+    option_2.title("Cadastro de SS")
     option_2.geometry("200x100")
     
     label_1 = tk.Label(option_2, text="This is label 1 in Option 2")
@@ -121,7 +121,7 @@ def option_2_interface():
 
 def option_3_interface():
     option_3 = tk.Toplevel()
-    option_3.title("Option 3")
+    option_3.title("Cadastro de Peças")
     option_3.geometry("200x100")
     
     label_1 = tk.Label(option_3, text="This is label 1 in Option 3")
@@ -132,7 +132,7 @@ def option_3_interface():
 
 def main():
     main_menu = tk.Tk()
-    main_menu.title("Main Menu")
+    main_menu.title("Menu-Cadastros")
     main_menu.geometry("200x150")
     
     option_1_button = tk.Button(main_menu, text="Cadastro de O.S", command=option_1_interface)
@@ -143,6 +143,13 @@ def main():
     
     option_3_button = tk.Button(main_menu, text="Cadastro de Equipamentos", command=option_3_interface)
     option_3_button.pack()
+    
+    def option_4_cancel():
+        main_menu.destroy()
+        print()
+
+    option_4_button = tk.Button(main_menu, text="Sair", command=option_4_cancel)
+    option_4_button.pack()
     
     main_menu.mainloop()
 
