@@ -1,3 +1,6 @@
+###  Copyright (c) [2023] [Gabriel-Roewer-Pilger]  
+###   Version (0.1) Updated in [14.02.2023]
+
 import tkinter as tk
 import sqlite3
 import tkinter.messagebox
