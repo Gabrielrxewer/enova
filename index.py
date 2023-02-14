@@ -138,17 +138,47 @@ def cad_os():
     #Função que gera a interface do cadastro de solicitação de serviço
 
 def cad_ss():
-    option_2 = tk.Toplevel()
-    option_2.title("Cadastro de SS")
-    option_2.geometry("200x100")
+    cad_ss = tk.Toplevel()
+    cad_ss.title("Cadastro de SS")
+    cad_ss.geometry("800x500")
     
     #Impressão da interface
 
-    lss1 = tk.Label(option_2, text="Código da SS")
+    lss1 = tk.Label(cad_ss, text="Código")
     lss1.grid(row=1, column=0, padx=10, pady=10)
     
-    lss2 = tk.Label(option_2, text="Teste label 2 SS")
+    ess1 = tk.Entry(cad_ss,width=40)
+    ess1.grid(row=1, column=1, padx=10, pady=10)
+
+    lss2 = tk.Label(cad_ss, text="Descrição")
     lss2.grid(row=2, column=0, padx=10, pady=10)
+
+    ess2 = tk.Entry(cad_ss, width=40)
+    ess2.grid(row=2, column=1, padx=10, pady=10)
+
+    lss3 = tk.Label(cad_ss, text="Setor")
+    lss3.grid(row=3, column=0, padx=10, pady=10)
+
+    ess3 = tk.Entry(cad_ss,width=40)
+    ess3.grid(row=3, column=1, padx=10, pady=10)
+
+    lss4 = tk.Label(cad_ss, text="Responsável")
+    lss4.grid(row=4, column=0, padx=10, pady=10)
+
+    ess4 = tk.Entry(cad_ss, width=40)
+    ess4.grid(row=4, column=1, padx=10, pady=10)
+
+    lss5 = tk.Label(cad_ss, text="Equipamento")
+    lss5.grid(row=5, column=0, padx=10, pady=10)
+
+    ess5 = tk.Entry(cad_ss, width=40)
+    ess5.grid(row=5, column=1, padx=10, pady=10)
+    
+    lss6 = tk.Label(cad_ss, text="Informações adicionais")
+    lss6.grid(row=6, column=0, padx=10, pady=10)
+
+    ess6 = tk.Entry(cad_ss, width=40)
+    ess6.grid(row=6, column=1, padx=10, pady=10)
 
     #Função que gera a interface do cadastro de peças
 
