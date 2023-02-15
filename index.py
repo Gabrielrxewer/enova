@@ -11,6 +11,8 @@ import tkinter as tk
 import sqlite3
 import tkinter.messagebox
 import os
+from tkinter import *
+
 
 # Variaveis de entrada
 
@@ -213,8 +215,23 @@ def rep_os():
                 with sqlite3.connect("C:\\Users\\inspe\\Desktop\\Qualidade\\Projetos py\\os.db") as conn:
                     c = conn.cursor()
 
-                    c.execute("INSERT INTO tb_OS (COD_OS, DESC_OS, ORIG_OS, RESP_OS, TIPO_OS, EQUIP_OS, SETOR_OS, INFOS_OS, HORA_OS, EXEC_OS, PARAM_OS) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
-                              (cod_os, desc_os, orig_os, resp_os, tipo_os, equip_os, setor_os, infos_os, hora_os, exec_os, param_os))
+                    c.execute("UPDATE tb_OS SET DESC_OS=?, ORIG_OS=?, RESP_OS=?, TIPO_OS=?, EQUIP_OS=?, SETOR_OS=?, INFOS_OS=?, HORA_OS=?, EXEC_OS=?, PARAM_OS=? WHERE COD_OS=?",
+                              (desc_os, orig_os, resp_os, tipo_os, equip_os, setor_os, infos_os, hora_os, exec_os, param_os, cod_os))
+                    tkinter.messagebox.showinfo(
+                    "Sucesso!", "A Ordem de Serviço foi alterada e Fechada!")
+                conn.commit()
+                eos2.delete(0, 'end')
+                eos3.delete(0, 'end')
+                eos4.delete(0, 'end')
+                eos5.delete(0, 'end')
+                eos6.delete(0, 'end')
+                eos7.delete(0, 'end')
+                eos8.delete(0, 'end')
+                eos9.delete(0, 'end')
+                eos10.delete(0, 'end')
+                eos1.delete(0, 'end')
+                os.system("cls")
+                print("Informações Alteradas e Inseridas!")
             elif res2==None:
                 with sqlite3.connect("C:\\Users\\inspe\\Desktop\\Qualidade\\Projetos py\\os.db") as conn:
                     c = conn.cursor()
