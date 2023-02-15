@@ -93,50 +93,50 @@ def cad_os():
 
     # Impressão da interface
 
-    los1 = tk.Label(cad_os, text="Código da O.S")
+    los1 = tk.Label(cad_os, text="Código da O.S", width=20)
     los1.grid(row=0, column=0, padx=70, pady=10)
 
     eos1 = tk.Entry(cad_os, width=40)
     eos1.insert(0, str(get_last_code()).zfill(3))
     eos1.grid(row=0, column=1, padx=10, pady=10)
 
-    los2 = tk.Label(cad_os, text="Descrição da O.S")
+    los2 = tk.Label(cad_os, text="Descrição da O.S", width=20)
     los2.grid(row=1, column=0, padx=10, pady=10)
 
     eos2 = tk.Entry(cad_os, width=40)
     eos2.grid(row=1, column=1, padx=10, pady=10)
 
-    los3 = tk.Label(cad_os, text="Origem O.S")
+    los3 = tk.Label(cad_os, text="Origem O.S", width=20)
     los3.grid(row=2, column=0, padx=10, pady=10)
 
     eos3 = tk.Entry(cad_os, width=40)
     eos3.grid(row=2, column=1, padx=10, pady=10)
 
-    los4 = tk.Label(cad_os, text="Responsável pela O.S")
+    los4 = tk.Label(cad_os, text="Responsável pela O.S", width=20)
     los4.grid(row=3, column=0, padx=10, pady=10)
 
     eos4 = tk.Entry(cad_os, width=40)
     eos4.grid(row=3, column=1, padx=10, pady=10)
 
-    los5 = tk.Label(cad_os, text="Tipo da O.S")
+    los5 = tk.Label(cad_os, text="Tipo da O.S", width=20)
     los5.grid(row=4, column=0, padx=10, pady=10)
 
     eos5 = tk.Entry(cad_os, width=40)
     eos5.grid(row=4, column=1, padx=10, pady=10)
 
-    los6 = tk.Label(cad_os, text="Equipamento")
+    los6 = tk.Label(cad_os, text="Equipamento", width=20)
     los6.grid(row=5, column=0, padx=10, pady=10)
 
     eos6 = tk.Entry(cad_os, width=40)
     eos6.grid(row=5, column=1, padx=10, pady=10)
 
-    los7 = tk.Label(cad_os, text="Setor")
+    los7 = tk.Label(cad_os, text="Setor", width=20)
     los7.grid(row=6, column=0, padx=10, pady=10)
 
     eos7 = tk.Entry(cad_os, width=40)
     eos7.grid(row=6, column=1, padx=10, pady=10)
 
-    los8 = tk.Label(cad_os, text="Informações")
+    los8 = tk.Label(cad_os, text="Informações", width=20)
     los8.grid(row=7, column=0, padx=10, pady=10)
 
     eos8 = tk.Entry(cad_os, width=40)
@@ -281,74 +281,74 @@ def rep_os():
 
     # Impressão da interface
 
-    los1 = tk.Label(rep_os, text="Código da O.S")
+    los1 = tk.Label(rep_os, text="Código da O.S", width=20)
     los1.grid(row=0, column=0, padx=70, pady=10)
 
     eos1 = tk.Entry(rep_os, width=40)
     eos1.grid(row=0, column=1, padx=10, pady=10)
 
-    los2 = tk.Label(rep_os, text="Descrição da O.S")
+    los2 = tk.Label(rep_os, text="Descrição da O.S", width=20)
     los2.grid(row=1, column=0, padx=10, pady=10)
 
     eos2 = tk.Entry(rep_os, width=40)
     eos2.grid(row=1, column=1, padx=10, pady=10)
 
-    los3 = tk.Label(rep_os, text="Origem O.S")
+    los3 = tk.Label(rep_os, text="Origem O.S", width=20)
     los3.grid(row=2, column=0, padx=10, pady=10)
 
     eos3 = tk.Entry(rep_os, width=40)
     eos3.grid(row=2, column=1, padx=10, pady=10)
 
-    los4 = tk.Label(rep_os, text="Responsável pela O.S")
+    los4 = tk.Label(rep_os, text="Responsável pela O.S", width=20)
     los4.grid(row=3, column=0, padx=10, pady=10)
 
     eos4 = tk.Entry(rep_os, width=40)
     eos4.grid(row=3, column=1, padx=10, pady=10)
 
-    los5 = tk.Label(rep_os, text="Tipo da O.S")
+    los5 = tk.Label(rep_os, text="Tipo da O.S", width=20)
     los5.grid(row=4, column=0, padx=10, pady=10)
 
     eos5 = tk.Entry(rep_os, width=40)
     eos5.grid(row=4, column=1, padx=10, pady=10)
 
-    los6 = tk.Label(rep_os, text="Equipamento")
+    los6 = tk.Label(rep_os, text="Equipamento", width=20)
     los6.grid(row=5, column=0, padx=10, pady=10)
 
     eos6 = tk.Entry(rep_os, width=40)
     eos6.grid(row=5, column=1, padx=10, pady=10)
 
-    los7 = tk.Label(rep_os, text="Setor")
+    los7 = tk.Label(rep_os, text="Setor", width=20)
     los7.grid(row=6, column=0, padx=10, pady=10)
 
     eos7 = tk.Entry(rep_os, width=40)
     eos7.grid(row=6, column=1, padx=10, pady=10)
 
-    los8 = tk.Label(rep_os, text="Informações")
+    los8 = tk.Label(rep_os, text="Informações", width=20)
     los8.grid(row=7, column=0, padx=10, pady=10)
 
     eos8 = tk.Entry(rep_os, width=40)
     eos8.grid(row=7, column=1, padx=10, pady=10)
 
-    los9 = tk.Label(rep_os, text="Horário de Execução")
+    los9 = tk.Label(rep_os, text="Horário de Execução", width=20)
     los9.grid(row=8, column=0, padx=10, pady=10)
 
     eos9 = tk.Entry(rep_os, width=40)
     eos9.grid(row=8, column=1, padx=10, pady=10) 
 
-    los10 = tk.Label(rep_os, text="Executor")
+    los10 = tk.Label(rep_os, text="Executor", width=20)
     los10.grid(row=9, column=0, padx=10, pady=10)
 
     eos10 = tk.Entry(rep_os, width=40)
     eos10.grid(row=9, column=1, padx=10, pady=10)       
 
-    save_button = tk.Button(rep_os, text="Gerar O.S", command=save_data)
+    save_button = tk.Button(rep_os, text="Fechar O.S", command=save_data)
     save_button.grid(row=10, column=0, columnspan=1, padx=10, pady=10)
 
     browse_button = tk.Button(rep_os, text="Busca", command=browse)
-    browse_button.grid(row=1, column=2, columnspan=1, padx=10, pady=10)
+    browse_button.grid(row=0, column=2, columnspan=1, padx=10, pady=10)
 
     cancel_button = tk.Button(rep_os, text="Cancelar", command=cancelar)
-    cancel_button.grid(row=10, column=1, columnspan=4, padx=90, pady=10)
+    cancel_button.grid(row=10, column=2, columnspan=4, padx=10, pady=10)
 
     # Função que gera a interface do cadastro de solicitação de serviço
 
@@ -416,38 +416,38 @@ def cad_ss():
 
     # Impressão da interface
 
-    lss1 = tk.Label(cad_ss, text="Código")
+    lss1 = tk.Label(cad_ss, text="Código", width=20)
     lss1.grid(row=1, column=0, padx=10, pady=10)
 
     ess1 = tk.Entry(cad_ss, width=40)
     ess1.insert(0, str(get_last_code()).zfill(3))
     ess1.grid(row=1, column=1, padx=10, pady=10)
 
-    lss2 = tk.Label(cad_ss, text="Descrição")
+    lss2 = tk.Label(cad_ss, text="Descrição", width=20)
     lss2.grid(row=2, column=0, padx=10, pady=10)
 
     ess2 = tk.Entry(cad_ss, width=40)
     ess2.grid(row=2, column=1, padx=10, pady=10)
 
-    lss3 = tk.Label(cad_ss, text="Setor")
+    lss3 = tk.Label(cad_ss, text="Setor", width=20)
     lss3.grid(row=3, column=0, padx=10, pady=10)
 
     ess3 = tk.Entry(cad_ss, width=40)
     ess3.grid(row=3, column=1, padx=10, pady=10)
 
-    lss4 = tk.Label(cad_ss, text="Responsável")
+    lss4 = tk.Label(cad_ss, text="Responsável", width=20)
     lss4.grid(row=4, column=0, padx=10, pady=10)
 
     ess4 = tk.Entry(cad_ss, width=40)
     ess4.grid(row=4, column=1, padx=10, pady=10)
 
-    lss5 = tk.Label(cad_ss, text="Equipamento")
+    lss5 = tk.Label(cad_ss, text="Equipamento", width=20)
     lss5.grid(row=5, column=0, padx=10, pady=10)
 
     ess5 = tk.Entry(cad_ss, width=40)
     ess5.grid(row=5, column=1, padx=10, pady=10)
 
-    lss6 = tk.Label(cad_ss, text="Informações adicionais")
+    lss6 = tk.Label(cad_ss, text="Informações adicionais", width=20)
     lss6.grid(row=6, column=0, padx=10, pady=10)
 
     ess6 = tk.Entry(cad_ss, width=40)
@@ -517,20 +517,20 @@ def cad_eqp():
 
     # Impressão da interface
 
-    leqp1 = tk.Label(cad_eq, text="Código")
+    leqp1 = tk.Label(cad_eq, text="Código", width=20)
     leqp1.grid(row=1, column=0, padx=10, pady=10)
 
     eeqp1 = tk.Entry(cad_eq, width=40)
     eeqp1.insert(0, str(get_last_code()).zfill(3))
     eeqp1.grid(row=1, column=1, padx=10, pady=10)
 
-    leqp2 = tk.Label(cad_eq, text="Descrição")
+    leqp2 = tk.Label(cad_eq, text="Descrição", width=20)
     leqp2.grid(row=2, column=0, padx=10, pady=10)
 
     eeqp2 = tk.Entry(cad_eq, width=40)
     eeqp2.grid(row=2, column=1, padx=10, pady=10)
 
-    leqp3 = tk.Label(cad_eq, text="Setor")
+    leqp3 = tk.Label(cad_eq, text="Setor", width=20)
     leqp3.grid(row=3, column=0, padx=10, pady=10)
 
     eeqp3 = tk.Entry(cad_eq, width=40)
@@ -606,32 +606,32 @@ def cad_pcs():
 
     # Impressão da interface
 
-    lpc1 = tk.Label(cad_pc, text="Codigo")
+    lpc1 = tk.Label(cad_pc, text="Codigo", width=20)
     lpc1.grid(row=1, column=0, padx=10, pady=10)
 
     epc1 = tk.Entry(cad_pc, width=40)
     epc1.insert(0, str(get_last_code()).zfill(3))
     epc1.grid(row=1, column=1, padx=10, pady=10)
 
-    lcp2 = tk.Label(cad_pc, text="Descrição")
+    lcp2 = tk.Label(cad_pc, text="Descrição", width=20)
     lcp2.grid(row=2, column=0, padx=10, pady=10)
 
     epc2 = tk.Entry(cad_pc, width=40)
     epc2.grid(row=2, column=1, padx=10, pady=10)
 
-    lpc3 = tk.Label(cad_pc, text="Preço")
+    lpc3 = tk.Label(cad_pc, text="Preço", width=20)
     lpc3.grid(row=3, column=0, padx=10, pady=10)
 
     epc3 = tk.Entry(cad_pc, width=40)
     epc3.grid(row=3, column=1, padx=10, pady=10)
 
-    lpc4 = tk.Label(cad_pc, text="Estoque")
+    lpc4 = tk.Label(cad_pc, text="Estoque", width=20)
     lpc4.grid(row=4, column=0, padx=10, pady=10)
 
     epc4 = tk.Entry(cad_pc, width=40)
     epc4.grid(row=4, column=1, padx=10, pady=10)
 
-    lpc5 = tk.Label(cad_pc, text="Informações adicionais")
+    lpc5 = tk.Label(cad_pc, text="Informações adicionais", width=20)
     lpc5.grid(row=5, column=0, padx=10, pady=10)
 
     epc5 = tk.Entry(cad_pc, width=40)
@@ -703,20 +703,20 @@ def cad_fun():
 
     # Impressão da interface
 
-    lfun1 = tk.Label(cad_f, text="Código do Funcionário")
+    lfun1 = tk.Label(cad_f, text="Código do Funcionário", width=20)
     lfun1.grid(row=1, column=0, padx=10, pady=10)
 
     efun1 = tk.Entry(cad_f, width=40)
     efun1.insert(0, str(get_last_code()).zfill(3))
     efun1.grid(row=1, column=1, padx=10, pady=10)
 
-    lfun2 = tk.Label(cad_f, text="Nome do Funcionário")
+    lfun2 = tk.Label(cad_f, text="Nome do Funcionário", width=20)
     lfun2.grid(row=2, column=0, padx=10, pady=10)
 
     efun2 = tk.Entry(cad_f, width=40)
     efun2.grid(row=2, column=1, padx=10, pady=10)
 
-    lfun3 = tk.Label(cad_f, text="Setor do Funcionário")
+    lfun3 = tk.Label(cad_f, text="Setor do Funcionário", width=20)
     lfun3.grid(row=3, column=0, padx=10, pady=10)
 
     efun3 = tk.Entry(cad_f, width=40)
@@ -784,14 +784,14 @@ def cad_set():
 
     # Impressão da interface
 
-    lset1 = tk.Label(cad_se, text="Código do Setor")
+    lset1 = tk.Label(cad_se, text="Código do Setor", width=20)
     lset1.grid(row=1, column=0, padx=10, pady=10)
 
     eset1 = tk.Entry(cad_se, width=40)
     eset1.insert(0, str(get_last_code()).zfill(3))
     eset1.grid(row=1, column=1, padx=10, pady=10)
 
-    lset2 = tk.Label(cad_se, text="Nome do Setor")
+    lset2 = tk.Label(cad_se, text="Nome do Setor", width=20)
     lset2.grid(row=2, column=0, padx=10, pady=10)
 
     eset2 = tk.Entry(cad_se, width=40)
@@ -809,33 +809,33 @@ def cad_set():
 def main():
     main_menu = tk.Tk()
     main_menu.title("Menu-Cadastros")
-    main_menu.geometry("170x500")
+    main_menu.geometry("240x500")
     main_menu.iconbitmap(default=icon)
     main_menu.config(bg='#202020')
 
     # Botões de acesso ás demais aplicações
 
-    c_os = tk.Button(main_menu, text="Cadastro de O.S", command=cad_os)
+    c_os = tk.Button(main_menu, text="Cadastro de O.S", command=cad_os, width=30)
     c_os.grid(row=1, column=1, padx=10, pady=10)
 
-    c_ss = tk.Button(main_menu, text="Cadastro de S.S", command=cad_ss)
+    c_ss = tk.Button(main_menu, text="Cadastro de S.S", command=cad_ss, width=30)
     c_ss.grid(row=2, column=1, padx=10, pady=10)
 
     c_eqp = tk.Button(
-        main_menu, text="Cadastro de Equipamentos", command=cad_eqp)
+        main_menu, text="Cadastro de Equipamentos", command=cad_eqp, width=30)
     c_eqp.grid(row=3, column=1, padx=10, pady=10)
 
-    c_pcs = tk.Button(main_menu, text="Cadastro de Peças", command=cad_pcs)
+    c_pcs = tk.Button(main_menu, text="Cadastro de Peças", command=cad_pcs, width=30)
     c_pcs.grid(row=4, column=1, padx=10, pady=10)
 
     c_fun = tk.Button(
-        main_menu, text="Cadastro de Funcionários", command=cad_fun)
+        main_menu, text="Cadastro de Funcionários", command=cad_fun, width=30)
     c_fun.grid(row=5, column=1, padx=10, pady=10)
 
-    c_set = tk.Button(main_menu, text="Cadastro de Setores", command=cad_set)
+    c_set = tk.Button(main_menu, text="Cadastro de Setores", command=cad_set, width=30)
     c_set.grid(row=6, column=1, padx=10, pady=10)
 
-    c_rep = tk.Button(main_menu, text="Reportar O.S's", command=rep_os)
+    c_rep = tk.Button(main_menu, text="Reportar O.S's", command=rep_os, width=30)
     c_rep.grid(row=7, column=1, padx=10, pady=10)
 
     # Função para fechar a interface
