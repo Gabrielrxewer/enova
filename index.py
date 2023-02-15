@@ -14,6 +14,8 @@ import os
 
 # Variaveis de entrada
 
+res2=None
+res = None
 icon = "C:\\Users\\inspe\\Desktop\\Qualidade\\Projetos py\\enova.ico"
 
 # Função que gera a interface do Cadastro de O.S
@@ -52,6 +54,7 @@ def cad_os():
         equip_os = eos6.get()
         setor_os = eos7.get()
         infos_os = eos8.get()
+        param_os = 1
 
         # Condição que verifica se os campos obrigatórios estão preenchidos
 
@@ -62,8 +65,8 @@ def cad_os():
             with sqlite3.connect("C:\\Users\\inspe\\Desktop\\Qualidade\\Projetos py\\os.db") as conn:
                 c = conn.cursor()
 
-                c.execute("INSERT INTO tb_OS (COD_OS, DESC_OS, ORIG_OS, RESP_OS, TIPO_OS, EQUIP_OS, SETOR_OS, INFOS_OS) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
-                          (cod_os, desc_os, orig_os, resp_os, tipo_os, equip_os, setor_os, infos_os))
+                c.execute("INSERT INTO tb_OS (COD_OS, DESC_OS, ORIG_OS, RESP_OS, TIPO_OS, EQUIP_OS, SETOR_OS, INFOS_OS, PARAM_OS) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                          (cod_os, desc_os, orig_os, resp_os, tipo_os, equip_os, setor_os, infos_os, param_os))
 
                 # Parâmetro para limpar os campos após salvar os dados
 
@@ -142,6 +145,193 @@ def cad_os():
 
     cancel_button = tk.Button(cad_os, text="Cancelar", command=cancelar)
     cancel_button.grid(row=9, column=1, columnspan=4, padx=90, pady=10)
+
+# Função para realizar o report de O.S
+
+def rep_os():
+    rep_os = tk.Toplevel()
+    rep_os.title("Report de O.S")
+    rep_os.geometry("800x500")
+    rep_os.config(bg='#202020')
+    rep_os.iconbitmap(default=icon)
+
+    # Função para buscar a O.S pelo código
+
+    def browse():
+        with sqlite3.connect("C:\\Users\\inspe\\Desktop\\Qualidade\\Projetos py\\os.db") as conn:
+            c = conn.cursor()
+            c.execute("SELECT * FROM tb_OS WHERE COD_OS=?", (eos1.get(),))
+            global res
+            res = c.fetchone()
+            if res:
+                eos2.delete(0, 'end')
+                eos2.insert(0, str(res[1]))
+                eos3.delete(0, 'end')                
+                eos3.insert(0, str(res[2]))
+                eos4.delete(0, 'end')                
+                eos4.insert(0, str(res[3]))
+                eos5.delete(0, 'end')                
+                eos5.insert(0, str(res[4]))
+                eos6.delete(0, 'end')                
+                eos6.insert(0, str(res[5]))
+                eos7.delete(0, 'end')                
+                eos7.insert(0, str(res[6]))
+                eos8.delete(0, 'end')                
+                eos8.insert(0, str(res[7]))
+            else:
+                tkinter.messagebox.showerror(
+                "Erro!", "Código não encontrado!")
+
+    # Função para armazenar as informações no banco de dados
+
+    def save_data():
+        cod_os = eos1.get()
+        desc_os = eos2.get()
+        orig_os = eos3.get()
+        resp_os = eos4.get()
+        tipo_os = eos5.get()
+        equip_os = eos6.get()
+        setor_os = eos7.get()
+        infos_os = eos8.get()
+        hora_os = eos9.get()
+        exec_os = eos10.get()
+        param_os = 2
+
+        # Condição que verifica se os campos obrigatórios estão preenchidos
+
+        try:
+            if eos2.get() == "" or eos3.get() == "" or eos4.get() == "" or eos5.get() == "" or eos6.get() == "" or eos7.get() == "" or eos8.get() == "" or eos9.get() == "" or eos10.get() == "":
+                tkinter.messagebox.showerror(
+                    "Erro!", "Todos os campos precisam ser preenchidos!")
+            elif eos2.get() != res[1] or eos3.get() != res[2] or eos4.get() != res[3] or eos5.get() != res[4] or eos6.get() != res[5] or eos7.get() != res[6] or eos8.get() != res[7]:
+                res2=tkinter.messagebox.askyesno("Confirmação", "Tem certeza que deseja alterar as informações?")
+            else:
+                res2=None
+
+        finally:
+            if res2==True:
+                with sqlite3.connect("C:\\Users\\inspe\\Desktop\\Qualidade\\Projetos py\\os.db") as conn:
+                    c = conn.cursor()
+
+                    c.execute("INSERT INTO tb_OS (COD_OS, DESC_OS, ORIG_OS, RESP_OS, TIPO_OS, EQUIP_OS, SETOR_OS, INFOS_OS, HORA_OS, EXEC_OS, PARAM_OS) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                              (cod_os, desc_os, orig_os, resp_os, tipo_os, equip_os, setor_os, infos_os, hora_os, exec_os, param_os))
+            elif res2==None:
+                with sqlite3.connect("C:\\Users\\inspe\\Desktop\\Qualidade\\Projetos py\\os.db") as conn:
+                    c = conn.cursor()
+
+                    c.execute("UPDATE tb_OS SET HORA_OS=?, EXEC_OS=?, PARAM_OS=? WHERE COD_OS=?",
+                            (hora_os, exec_os, param_os, cod_os))
+                tkinter.messagebox.showinfo(
+                    "Sucesso!", "A Ordem de Serviço foi Fechada!")
+                conn.commit()
+                eos2.delete(0, 'end')
+                eos3.delete(0, 'end')
+                eos4.delete(0, 'end')
+                eos5.delete(0, 'end')
+                eos6.delete(0, 'end')
+                eos7.delete(0, 'end')
+                eos8.delete(0, 'end')
+                eos9.delete(0, 'end')
+                eos10.delete(0, 'end')
+                eos1.delete(0, 'end')
+                os.system("cls")
+                print("Informações inseridas!")
+            else:
+                eos2.delete(0, 'end')
+                eos2.insert(0, str(res[1]))
+                eos3.delete(0, 'end')                
+                eos3.insert(0, str(res[2]))
+                eos4.delete(0, 'end')                
+                eos4.insert(0, str(res[3]))
+                eos5.delete(0, 'end')                
+                eos5.insert(0, str(res[4]))
+                eos6.delete(0, 'end')                
+                eos6.insert(0, str(res[5]))
+                eos7.delete(0, 'end')                
+                eos7.insert(0, str(res[6]))
+                eos8.delete(0, 'end')                
+                eos8.insert(0, str(res[7]))                                                       
+
+                # Parâmetro para limpar os campos após salvar os dados
+
+
+
+    # Função para fechamento da interface
+
+    def cancelar():
+        rep_os.destroy()
+        print("Janela fechada")
+
+    # Impressão da interface
+
+    los1 = tk.Label(rep_os, text="Código da O.S")
+    los1.grid(row=0, column=0, padx=70, pady=10)
+
+    eos1 = tk.Entry(rep_os, width=40)
+    eos1.grid(row=0, column=1, padx=10, pady=10)
+
+    los2 = tk.Label(rep_os, text="Descrição da O.S")
+    los2.grid(row=1, column=0, padx=10, pady=10)
+
+    eos2 = tk.Entry(rep_os, width=40)
+    eos2.grid(row=1, column=1, padx=10, pady=10)
+
+    los3 = tk.Label(rep_os, text="Origem O.S")
+    los3.grid(row=2, column=0, padx=10, pady=10)
+
+    eos3 = tk.Entry(rep_os, width=40)
+    eos3.grid(row=2, column=1, padx=10, pady=10)
+
+    los4 = tk.Label(rep_os, text="Responsável pela O.S")
+    los4.grid(row=3, column=0, padx=10, pady=10)
+
+    eos4 = tk.Entry(rep_os, width=40)
+    eos4.grid(row=3, column=1, padx=10, pady=10)
+
+    los5 = tk.Label(rep_os, text="Tipo da O.S")
+    los5.grid(row=4, column=0, padx=10, pady=10)
+
+    eos5 = tk.Entry(rep_os, width=40)
+    eos5.grid(row=4, column=1, padx=10, pady=10)
+
+    los6 = tk.Label(rep_os, text="Equipamento")
+    los6.grid(row=5, column=0, padx=10, pady=10)
+
+    eos6 = tk.Entry(rep_os, width=40)
+    eos6.grid(row=5, column=1, padx=10, pady=10)
+
+    los7 = tk.Label(rep_os, text="Setor")
+    los7.grid(row=6, column=0, padx=10, pady=10)
+
+    eos7 = tk.Entry(rep_os, width=40)
+    eos7.grid(row=6, column=1, padx=10, pady=10)
+
+    los8 = tk.Label(rep_os, text="Informações")
+    los8.grid(row=7, column=0, padx=10, pady=10)
+
+    eos8 = tk.Entry(rep_os, width=40)
+    eos8.grid(row=7, column=1, padx=10, pady=10)
+
+    los9 = tk.Label(rep_os, text="Horário de Execução")
+    los9.grid(row=8, column=0, padx=10, pady=10)
+
+    eos9 = tk.Entry(rep_os, width=40)
+    eos9.grid(row=8, column=1, padx=10, pady=10) 
+
+    los10 = tk.Label(rep_os, text="Executor")
+    los10.grid(row=9, column=0, padx=10, pady=10)
+
+    eos10 = tk.Entry(rep_os, width=40)
+    eos10.grid(row=9, column=1, padx=10, pady=10)       
+
+    save_button = tk.Button(rep_os, text="Gerar O.S", command=save_data)
+    save_button.grid(row=10, column=0, columnspan=1, padx=10, pady=10)
+
+    browse_button = tk.Button(rep_os, text="Busca", command=browse)
+    browse_button.grid(row=1, column=2, columnspan=1, padx=10, pady=10)
+
+    cancel_button = tk.Button(rep_os, text="Cancelar", command=cancelar)
+    cancel_button.grid(row=10, column=1, columnspan=4, padx=90, pady=10)
 
     # Função que gera a interface do cadastro de solicitação de serviço
 
@@ -602,7 +792,7 @@ def cad_set():
 def main():
     main_menu = tk.Tk()
     main_menu.title("Menu-Cadastros")
-    main_menu.geometry("170x400")
+    main_menu.geometry("170x500")
     main_menu.iconbitmap(default=icon)
     main_menu.config(bg='#202020')
 
@@ -628,6 +818,9 @@ def main():
     c_set = tk.Button(main_menu, text="Cadastro de Setores", command=cad_set)
     c_set.grid(row=6, column=1, padx=10, pady=10)
 
+    c_rep = tk.Button(main_menu, text="Reportar O.S's", command=rep_os)
+    c_rep.grid(row=7, column=1, padx=10, pady=10)
+
     # Função para fechar a interface
 
     def cancel_menu():
@@ -637,7 +830,7 @@ def main():
     # Botão para fechar a interface
 
     c_left = tk.Button(main_menu, text="Sair", command=cancel_menu)
-    c_left.grid(row=7, column=1, padx=10, pady=70)
+    c_left.grid(row=8, column=1, padx=10, pady=70)
 
     main_menu.mainloop()
 
