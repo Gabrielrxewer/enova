@@ -11,8 +11,6 @@ import tkinter as tk
 import sqlite3
 import tkinter.messagebox
 import os
-from tkinter import *
-
 
 # Variaveis de entrada
 
@@ -57,6 +55,8 @@ def cad_os():
         setor_os = eos7.get()
         infos_os = eos8.get()
         param_os = 1
+
+        global res2
 
         # Condição que verifica se os campos obrigatórios estão preenchidos
 
@@ -187,6 +187,7 @@ def rep_os():
     # Função para armazenar as informações no banco de dados
 
     def save_data():
+        global res2
         cod_os = eos1.get()
         desc_os = eos2.get()
         orig_os = eos3.get()
@@ -199,18 +200,31 @@ def rep_os():
         exec_os = eos10.get()
         param_os = 2
 
-        # Condição que verifica se os campos obrigatórios estão preenchidos
+        
 
         try:
-            if eos2.get() == "" or eos3.get() == "" or eos4.get() == "" or eos5.get() == "" or eos6.get() == "" or eos7.get() == "" or eos8.get() == "" or eos9.get() == "" or eos10.get() == "":
+
+            # Condição que verifica se os campos obrigatórios estão preenchidos e retorna uma confirmação
+
+            if eos1.get() == "" or eos2.get() == "" or eos3.get() == "" or eos4.get() == "" or eos5.get() == "" or eos6.get() == "" or eos7.get() == "" or eos8.get() == "" or eos9.get() == "" or eos10.get() == "":
                 tkinter.messagebox.showerror(
                     "Erro!", "Todos os campos precisam ser preenchidos!")
+                res2 = 2    
+
+            # Condição que verifica se as informações já existentes foram alteradas
+
             elif eos2.get() != res[1] or eos3.get() != res[2] or eos4.get() != res[3] or eos5.get() != res[4] or eos6.get() != res[5] or eos7.get() != res[6] or eos8.get() != res[7]:
                 res2=tkinter.messagebox.askyesno("Confirmação", "Tem certeza que deseja alterar as informações?")
+
+            # Condição que define res2 caso todos os campos estejam preenchidos e caso não houve alteração nas informações existentes
+
             else:
                 res2=None
 
         finally:
+
+            # Condição que verifica se o usuário confirmou as alterações nas informações da O.S e atualiza os dados
+
             if res2==True:
                 with sqlite3.connect("C:\\Users\\inspe\\Desktop\\Qualidade\\Projetos py\\os.db") as conn:
                     c = conn.cursor()
@@ -232,7 +246,31 @@ def rep_os():
                 eos1.delete(0, 'end')
                 os.system("cls")
                 print("Informações Alteradas e Inseridas!")
-            elif res2==None:
+
+            # Condição que verifica se nenhuma informação existente foi alterada e faz a inserção dos dados para fechamento da O.S
+
+            elif res2==False:
+                eos2.delete(0, 'end')
+                eos2.insert(0, str(res[1]))
+                eos3.delete(0, 'end')                
+                eos3.insert(0, str(res[2]))
+                eos4.delete(0, 'end')                
+                eos4.insert(0, str(res[3]))
+                eos5.delete(0, 'end')                
+                eos5.insert(0, str(res[4]))
+                eos6.delete(0, 'end')                
+                eos6.insert(0, str(res[5]))
+                eos7.delete(0, 'end')                
+                eos7.insert(0, str(res[6]))
+                eos8.delete(0, 'end')                
+                eos8.insert(0, str(res[7])) 
+                print("Nenhuma informação foi inserida")
+
+            # Condição que verifica se o usuário não quer alterar as informações existentes e retorna as informações antigas             
+
+            elif res2==2:
+                print("Preencha as Informações!")
+            else:                                          
                 with sqlite3.connect("C:\\Users\\inspe\\Desktop\\Qualidade\\Projetos py\\os.db") as conn:
                     c = conn.cursor()
 
@@ -253,26 +291,7 @@ def rep_os():
                 eos1.delete(0, 'end')
                 os.system("cls")
                 print("Informações inseridas!")
-            else:
-                eos2.delete(0, 'end')
-                eos2.insert(0, str(res[1]))
-                eos3.delete(0, 'end')                
-                eos3.insert(0, str(res[2]))
-                eos4.delete(0, 'end')                
-                eos4.insert(0, str(res[3]))
-                eos5.delete(0, 'end')                
-                eos5.insert(0, str(res[4]))
-                eos6.delete(0, 'end')                
-                eos6.insert(0, str(res[5]))
-                eos7.delete(0, 'end')                
-                eos7.insert(0, str(res[6]))
-                eos8.delete(0, 'end')                
-                eos8.insert(0, str(res[7]))                                                       
-
-                # Parâmetro para limpar os campos após salvar os dados
-
-
-
+            
     # Função para fechamento da interface
 
     def cancelar():
@@ -348,7 +367,7 @@ def rep_os():
     browse_button.grid(row=0, column=2, columnspan=1, padx=10, pady=10)
 
     cancel_button = tk.Button(rep_os, text="Cancelar", command=cancelar)
-    cancel_button.grid(row=10, column=2, columnspan=4, padx=10, pady=10)
+    cancel_button.grid(row=1, column=2, columnspan=4, padx=10, pady=10)
 
     # Função que gera a interface do cadastro de solicitação de serviço
 
