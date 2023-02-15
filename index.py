@@ -84,7 +84,7 @@ def cad_os():
         cad_os.destroy()
         print("Janela fechada")
 
-    #Impressão da interface 
+    #Impressão da interface
 
     los1 = tk.Label(cad_os, text="Código da O.S")
     los1.grid(row=0, column=0, padx=70, pady=10)
@@ -149,13 +149,67 @@ def cad_ss():
     cad_ss.geometry("800x500")
     cad_ss.config(bg='#202020')
     cad_ss.iconbitmap(default=icon)
+
+    #Função para conferir o último Código da O.S no banco de dados e definir o próximo código
     
+    def get_last_code():
+        with sqlite3.connect("C:\\Users\\inspe\\Desktop\\Qualidade\\Projetos py\\os.db") as conn:
+            c = conn.cursor()
+
+            c.execute("SELECT COD_SS FROM tb_SS ORDER BY COD_SS DESC LIMIT 1")
+            last_code= c.fetchone()
+            if last_code is not None:
+                last_code = last_code[0]
+            else:
+                last_code = 0
+            new_code = int(last_code) + 1
+            return new_code
+
+    def save_data():
+        cod_ss = ess1.get()
+        desc_ss = ess2.get()
+        setor_ss = ess3.get()
+        resp_ss = ess4.get()
+        equip_ss = ess5.get()
+        infos_ss = ess6.get()
+
+        #Condição que verifica se os campos obrigatórios estão preenchidos
+
+        if ess2.get() == "" or ess3.get() == "" or ess4.get() == "" or ess5.get() == "" or ess6.get() == "":
+            tkinter.messagebox.showerror("Erro!", "Todos os campos precisam ser preenchidos!")
+        else:
+            with sqlite3.connect("C:\\Users\\inspe\\Desktop\\Qualidade\\Projetos py\\os.db") as conn:
+                c = conn.cursor()
+
+                c.execute("INSERT INTO tb_SS (COD_SS, DESC_SS, RESP_SS, SETOR_SS, EQUIP_SS, INFOS_SS) VALUES (?, ?, ?, ?, ?, ?)",
+                        (cod_ss, desc_ss, resp_ss, equip_ss, setor_ss, infos_ss))
+                
+                #Parâmetro para limpar os campos após salvar os dados
+                
+                conn.commit() 
+                ess2.delete(0, 'end')
+                ess3.delete(0, 'end')
+                ess4.delete(0, 'end')
+                ess5.delete(0, 'end')
+                ess6.delete(0, 'end')
+                ess1.delete(0, 'end')
+                ess1.insert(0, str(get_last_code()).zfill(3))
+                os.system("cls")
+                print("Informações inseridas!")
+    
+    #Função para fechamento da interface
+    
+    def cancelar():
+        cad_ss.destroy()
+        print("Janela fechada")
+   
     #Impressão da interface
 
     lss1 = tk.Label(cad_ss, text="Código")
     lss1.grid(row=1, column=0, padx=10, pady=10)
     
-    ess1 = tk.Entry(cad_ss,width=40)
+    ess1 = tk.Entry(cad_ss, width=40)
+    ess1.insert(0, str(get_last_code()).zfill(3))
     ess1.grid(row=1, column=1, padx=10, pady=10)
 
     lss2 = tk.Label(cad_ss, text="Descrição")
@@ -186,7 +240,13 @@ def cad_ss():
     lss6.grid(row=6, column=0, padx=10, pady=10)
 
     ess6 = tk.Entry(cad_ss, width=40)
-    ess6.grid(row=6, column=1, padx=10, pady=10)
+    ess6.grid(row=6, column=1, padx=10, pady=10) 
+
+    save_button = tk.Button(cad_ss, text="Gerar S.S", command=save_data)
+    save_button.grid(row=9, column=0, columnspan=1, padx=10, pady=10)
+
+    cancel_button = tk.Button(cad_ss, text="Cancelar", command=cancelar)
+    cancel_button.grid(row=9, column=1, columnspan=4, padx=90, pady=10)
 
     #Função que gera a interface do cadastro de peças
 
@@ -197,19 +257,77 @@ def cad_eqp():
     cad_eq.config(bg='#202020')
     cad_eq.iconbitmap(default=icon)
     
+    def get_last_code():
+        with sqlite3.connect("C:\\Users\\inspe\\Desktop\\Qualidade\\Projetos py\\os.db") as conn:
+            c = conn.cursor()
+
+            c.execute("SELECT COD_SS FROM tb_SS ORDER BY COD_SS DESC LIMIT 1")
+            last_code= c.fetchone()
+            if last_code is not None:
+                last_code = last_code[0]
+            else:
+                last_code = 0
+            new_code = int(last_code) + 1
+            return new_code
+
+    def save_data():
+        cod_eqp = eeqp1.get()
+        desc_eqp = eeqp2.get()
+        setor_eqp = eeqp3.get()
+
+        #Condição que verifica se os campos obrigatórios estão preenchidos
+
+        if eeqp2.get() == "" or eeqp3.get() == "":
+            tkinter.messagebox.showerror("Erro!", "Todos os campos precisam ser preenchidos!")
+        else:
+            with sqlite3.connect("C:\\Users\\inspe\\Desktop\\Qualidade\\Projetos py\\os.db") as conn:
+                c = conn.cursor()
+
+                c.execute("INSERT INTO tb_EQP (COD_EQP, DESC_EQP, SETOR_EQP) VALUES (?, ?, ?)",
+                        (cod_eqp, desc_eqp, setor_eqp))
+                
+                #Parâmetro para limpar os campos após salvar os dados
+                
+                conn.commit() 
+                eeqp2.delete(0, 'end')
+                eeqp3.delete(0, 'end')
+                eeqp1.delete(0, 'end')
+                eeqp1.insert(0, str(get_last_code()).zfill(3))
+                os.system("cls")
+                print("Informações inseridas!")
+    
+    #Função para fechamento da interface
+    
+    def cancelar():
+        cad_eq.destroy()
+        print("Janela fechada")
+
     #Impressão da interface
 
     leqp1 = tk.Label(cad_eq, text="Código")
     leqp1.grid(row=1, column=0, padx=10, pady=10)
 
     eeqp1 = tk.Entry(cad_eq, width=40)
+    eeqp1.insert(0, str(get_last_code()).zfill(3))
     eeqp1.grid(row=1, column=1, padx=10, pady=10)
-    
+
     leqp2 = tk.Label(cad_eq, text="Descrição")
     leqp2.grid(row=2, column=0, padx=10, pady=10)
 
     eeqp2 = tk.Entry(cad_eq, width=40)
     eeqp2.grid(row=2, column=1, padx=10, pady=10)
+
+    leqp3 = tk.Label(cad_eq, text="Setor")
+    leqp3.grid(row=3, column=0, padx=10, pady=10)
+
+    eeqp3 = tk.Entry(cad_eq, width=40)
+    eeqp3.grid(row=3, column=1, padx=10, pady=10)
+
+    save_button = tk.Button(cad_eq, text="Gerar S.S", command=save_data)
+    save_button.grid(row=4, column=0, columnspan=1, padx=10, pady=10)
+
+    cancel_button = tk.Button(cad_eq, text="Cancelar", command=cancelar)
+    cancel_button.grid(row=4, column=1, columnspan=4, padx=90, pady=10)    
 
     #Função para gerar a interface do Menu
 
