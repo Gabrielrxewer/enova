@@ -14,7 +14,7 @@ import os
 
 # Variaveis de entrada
 
-res2=None
+res2 = None
 res = None
 icon = "C:\\Users\\inspe\\Desktop\\Qualidade\\Projetos py\\enova.ico"
 
@@ -150,6 +150,7 @@ def cad_os():
 
 # Função para realizar o report de O.S
 
+
 def rep_os():
     rep_os = tk.Toplevel()
     rep_os.title("Report de O.S")
@@ -168,21 +169,21 @@ def rep_os():
             if res:
                 eos2.delete(0, 'end')
                 eos2.insert(0, str(res[1]))
-                eos3.delete(0, 'end')                
+                eos3.delete(0, 'end')
                 eos3.insert(0, str(res[2]))
-                eos4.delete(0, 'end')                
+                eos4.delete(0, 'end')
                 eos4.insert(0, str(res[3]))
-                eos5.delete(0, 'end')                
+                eos5.delete(0, 'end')
                 eos5.insert(0, str(res[4]))
-                eos6.delete(0, 'end')                
+                eos6.delete(0, 'end')
                 eos6.insert(0, str(res[5]))
-                eos7.delete(0, 'end')                
+                eos7.delete(0, 'end')
                 eos7.insert(0, str(res[6]))
-                eos8.delete(0, 'end')                
+                eos8.delete(0, 'end')
                 eos8.insert(0, str(res[7]))
             else:
                 tkinter.messagebox.showerror(
-                "Erro!", "Código não encontrado!")
+                    "Erro!", "Código não encontrado!")
 
     # Função para armazenar as informações no banco de dados
 
@@ -199,7 +200,7 @@ def rep_os():
         hora_os = eos9.get()
         exec_os = eos10.get()
         param_os = 2
-     
+
         try:
 
             # Condição que verifica se os campos obrigatórios estão preenchidos e retorna uma confirmação
@@ -207,30 +208,31 @@ def rep_os():
             if eos1.get() == "" or eos2.get() == "" or eos3.get() == "" or eos4.get() == "" or eos5.get() == "" or eos6.get() == "" or eos7.get() == "" or eos8.get() == "" or eos9.get() == "" or eos10.get() == "":
                 tkinter.messagebox.showerror(
                     "Erro!", "Todos os campos precisam ser preenchidos!")
-                res2 = 2    
+                res2 = 2
 
             # Condição que verifica se as informações já existentes foram alteradas
 
             elif eos2.get() != res[1] or eos3.get() != res[2] or eos4.get() != res[3] or eos5.get() != res[4] or eos6.get() != res[5] or eos7.get() != res[6] or eos8.get() != res[7]:
-                res2=tkinter.messagebox.askyesno("Confirmação", "Tem certeza que deseja alterar as informações?")
+                res2 = tkinter.messagebox.askyesno(
+                    "Confirmação", "Tem certeza que deseja alterar as informações?")
 
             # Condição que define res2 caso todos os campos estejam preenchidos e caso não houve alteração nas informações existentes
 
             else:
-                res2=None
+                res2 = None
 
         finally:
 
             # Condição que verifica se o usuário confirmou as alterações nas informações da O.S e atualiza os dados
 
-            if res2==True:
+            if res2 == True:
                 with sqlite3.connect("C:\\Users\\inspe\\Desktop\\Qualidade\\Projetos py\\os.db") as conn:
                     c = conn.cursor()
 
                     c.execute("UPDATE tb_OS SET DESC_OS=?, ORIG_OS=?, RESP_OS=?, TIPO_OS=?, EQUIP_OS=?, SETOR_OS=?, INFOS_OS=?, HORA_OS=?, EXEC_OS=?, PARAM_OS=? WHERE COD_OS=?",
                               (desc_os, orig_os, resp_os, tipo_os, equip_os, setor_os, infos_os, hora_os, exec_os, param_os, cod_os))
                     tkinter.messagebox.showinfo(
-                    "Sucesso!", "A Ordem de Serviço foi alterada e Fechada!")
+                        "Sucesso!", "A Ordem de Serviço foi alterada e Fechada!")
                 conn.commit()
                 eos2.delete(0, 'end')
                 eos3.delete(0, 'end')
@@ -247,33 +249,33 @@ def rep_os():
 
             # Condição que verifica se nenhuma informação existente foi alterada e faz a inserção dos dados para fechamento da O.S
 
-            elif res2==False:
+            elif res2 == False:
                 eos2.delete(0, 'end')
                 eos2.insert(0, str(res[1]))
-                eos3.delete(0, 'end')                
+                eos3.delete(0, 'end')
                 eos3.insert(0, str(res[2]))
-                eos4.delete(0, 'end')                
+                eos4.delete(0, 'end')
                 eos4.insert(0, str(res[3]))
-                eos5.delete(0, 'end')                
+                eos5.delete(0, 'end')
                 eos5.insert(0, str(res[4]))
-                eos6.delete(0, 'end')                
+                eos6.delete(0, 'end')
                 eos6.insert(0, str(res[5]))
-                eos7.delete(0, 'end')                
+                eos7.delete(0, 'end')
                 eos7.insert(0, str(res[6]))
-                eos8.delete(0, 'end')                
-                eos8.insert(0, str(res[7])) 
+                eos8.delete(0, 'end')
+                eos8.insert(0, str(res[7]))
                 print("Nenhuma informação foi inserida")
 
-            # Condição que verifica se o usuário não quer alterar as informações existentes e retorna as informações antigas             
+            # Condição que verifica se o usuário não quer alterar as informações existentes e retorna as informações antigas
 
-            elif res2==2:
+            elif res2 == 2:
                 print("Preencha as Informações!")
-            else:                                          
+            else:
                 with sqlite3.connect("C:\\Users\\inspe\\Desktop\\Qualidade\\Projetos py\\os.db") as conn:
                     c = conn.cursor()
 
                     c.execute("UPDATE tb_OS SET HORA_OS=?, EXEC_OS=?, PARAM_OS=? WHERE COD_OS=?",
-                            (hora_os, exec_os, param_os, cod_os))
+                              (hora_os, exec_os, param_os, cod_os))
                 tkinter.messagebox.showinfo(
                     "Sucesso!", "A Ordem de Serviço foi Fechada!")
                 conn.commit()
@@ -289,7 +291,7 @@ def rep_os():
                 eos1.delete(0, 'end')
                 os.system("cls")
                 print("Informações inseridas!")
-            
+
     # Função para fechamento da interface
 
     def cancelar():
@@ -350,21 +352,23 @@ def rep_os():
     los9.grid(row=8, column=0, padx=10, pady=10)
 
     eos9 = tk.Entry(rep_os, width=60)
-    eos9.grid(row=8, column=1, padx=10, pady=10) 
+    eos9.grid(row=8, column=1, padx=10, pady=10)
 
     los10 = tk.Label(rep_os, text="Executor", width=20)
     los10.grid(row=9, column=0, padx=10, pady=10)
 
     eos10 = tk.Entry(rep_os, width=60)
-    eos10.grid(row=9, column=1, padx=10, pady=10)       
+    eos10.grid(row=9, column=1, padx=10, pady=10)
 
-    save_button = tk.Button(rep_os, text="Fechar O.S", command=save_data, width=15)
+    save_button = tk.Button(rep_os, text="Fechar O.S",
+                            command=save_data, width=15)
     save_button.grid(row=10, column=0, columnspan=1, padx=10, pady=10)
 
     browse_button = tk.Button(rep_os, text="Busca", command=browse, width=15)
     browse_button.grid(row=0, column=2, columnspan=1, padx=10, pady=10)
 
-    cancel_button = tk.Button(rep_os, text="Cancelar", command=cancelar, width=15)
+    cancel_button = tk.Button(rep_os, text="Cancelar",
+                              command=cancelar, width=15)
     cancel_button.grid(row=1, column=2, columnspan=4, padx=10, pady=10)
 
     # Função que gera a interface do cadastro de solicitação de serviço
@@ -773,7 +777,7 @@ def cad_set():
         desc_set = eset2.get()
 
         # Condição que verifica se os campos obrigatórios estão preenchidos
-    
+
         if eset2.get() == "":
             tkinter.messagebox.showerror(
                 "Erro!", "Todos os campos precisam ser preenchidos!")
@@ -822,6 +826,7 @@ def cad_set():
 
     # Função para gerar gerar a interface das O.S's em Aberto
 
+
 def abe_os():
     ab_os = tk.Tk()
     ab_os.title("Ordens em Aberto")
@@ -830,6 +835,7 @@ def abe_os():
     ab_os.config(bg='#202020')
 
     # Função para gerar a interface do Menu principal
+
 
 def main():
     main_menu = tk.Tk()
@@ -840,30 +846,36 @@ def main():
 
     # Botões de acesso ás demais aplicações
 
-    c_os = tk.Button(main_menu, text="Cadastro de O.S", command=cad_os, width=30)
+    c_os = tk.Button(main_menu, text="Cadastro de O.S",
+                     command=cad_os, width=30)
     c_os.grid(row=1, column=1, padx=10, pady=10)
 
-    c_ss = tk.Button(main_menu, text="Cadastro de S.S", command=cad_ss, width=30)
+    c_ss = tk.Button(main_menu, text="Cadastro de S.S",
+                     command=cad_ss, width=30)
     c_ss.grid(row=2, column=1, padx=10, pady=10)
 
     c_eqp = tk.Button(
         main_menu, text="Cadastro de Equipamentos", command=cad_eqp, width=30)
     c_eqp.grid(row=3, column=1, padx=10, pady=10)
 
-    c_pcs = tk.Button(main_menu, text="Cadastro de Peças", command=cad_pcs, width=30)
+    c_pcs = tk.Button(main_menu, text="Cadastro de Peças",
+                      command=cad_pcs, width=30)
     c_pcs.grid(row=4, column=1, padx=10, pady=10)
 
     c_fun = tk.Button(
         main_menu, text="Cadastro de Funcionários", command=cad_fun, width=30)
     c_fun.grid(row=5, column=1, padx=10, pady=10)
 
-    c_set = tk.Button(main_menu, text="Cadastro de Setores", command=cad_set, width=30)
+    c_set = tk.Button(main_menu, text="Cadastro de Setores",
+                      command=cad_set, width=30)
     c_set.grid(row=6, column=1, padx=10, pady=10)
 
-    c_rep = tk.Button(main_menu, text="Reportar O.S's", command=rep_os, width=30)
+    c_rep = tk.Button(main_menu, text="Reportar O.S's",
+                      command=rep_os, width=30)
     c_rep.grid(row=7, column=1, padx=10, pady=10)
 
-    c_abe = tk.Button(main_menu, text="O.S's em Aberto", command=abe_os, width=30)
+    c_abe = tk.Button(main_menu, text="O.S's em Aberto",
+                      command=abe_os, width=30)
     c_abe.grid(row=8, column=1, padx=10, pady=10)
 
     # Função para fechar a interface
