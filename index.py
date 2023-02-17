@@ -1,7 +1,7 @@
 ## ----------------------------------------------------##
 
 ###  Copyright (c) [2023] [Gabriel-Roewer-Pilger]    ###
-###   Version (1.3) Updated in [16.02.2023]          ###
+###   Version (1.4) Updated in [16.02.2023]          ###
 
 ## ----------------------------------------------------##
 
@@ -830,9 +830,27 @@ def cad_set():
 def abe_os():
     ab_os = tk.Tk()
     ab_os.title("Ordens em Aberto")
-    ab_os.geometry("800x500")
+    ab_os.geometry("900x500")
     ab_os.iconbitmap(default=icon)
     ab_os.config(bg='#202020')
+
+    with sqlite3.connect("C:\\Users\\inspe\\Desktop\\Qualidade\\Projetos py\\os.db") as conn:
+        c = conn.cursor()
+
+        c.execute('SELECT * FROM tb_OS')
+        rows = c.fetchall()
+
+    lab= tk.Label(ab_os, text='O.S')
+    lab.grid(row=0, columns=1)
+
+    i=1
+    for row in rows:
+        j = 0
+        for col in row:
+            lab = tk.Label(ab_os, text=col)
+            lab.grid(row=i, column=j)
+            j=j+1
+        i=i+1
 
     # Função para gerar a interface do Menu principal
 
