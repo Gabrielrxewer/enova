@@ -2,5 +2,6 @@
 
 **Software de manutenção** 
 
-O código está sendo desenvolvido a fins de estudo por Gabriel Roewer Pilger, 
-será disponibilizado para testes para a enova e se aprovado irá fazer parte da produção.
+O código é um protótipo, desenvolvido por Gabriel Roewer Pilger,
+um protótipo com o intuito de servir de apresentação para a Enova.
+
