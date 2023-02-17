@@ -150,7 +150,6 @@ def cad_os():
 
 # Função para realizar o report de O.S
 
-
 def rep_os():
     rep_os = tk.Toplevel()
     rep_os.title("Report de O.S")
@@ -197,7 +196,8 @@ def rep_os():
         equip_os = eos6.get()
         setor_os = eos7.get()
         infos_os = eos8.get()
-        hora_os = eos9.get()
+        inic_os = eos9.get()
+        term_os = eos11.get()
         exec_os = eos10.get()
         param_os = 2
 
@@ -205,7 +205,7 @@ def rep_os():
 
             # Condição que verifica se os campos obrigatórios estão preenchidos e retorna uma confirmação
 
-            if eos1.get() == "" or eos2.get() == "" or eos3.get() == "" or eos4.get() == "" or eos5.get() == "" or eos6.get() == "" or eos7.get() == "" or eos8.get() == "" or eos9.get() == "" or eos10.get() == "":
+            if eos1.get() == "" or eos2.get() == "" or eos3.get() == "" or eos4.get() == "" or eos5.get() == "" or eos6.get() == "" or eos7.get() == "" or eos8.get() == "" or eos9.get() == "" or eos10.get() == "" or eos11.get() == "":
                 tkinter.messagebox.showerror(
                     "Erro!", "Todos os campos precisam ser preenchidos!")
                 res2 = 2
@@ -229,8 +229,8 @@ def rep_os():
                 with sqlite3.connect("C:\\Users\\inspe\\Desktop\\Qualidade\\Projetos py\\os.db") as conn:
                     c = conn.cursor()
 
-                    c.execute("UPDATE tb_OS SET DESC_OS=?, ORIG_OS=?, RESP_OS=?, TIPO_OS=?, EQUIP_OS=?, SETOR_OS=?, INFOS_OS=?, HORA_OS=?, EXEC_OS=?, PARAM_OS=? WHERE COD_OS=?",
-                              (desc_os, orig_os, resp_os, tipo_os, equip_os, setor_os, infos_os, hora_os, exec_os, param_os, cod_os))
+                    c.execute("UPDATE tb_OS SET DESC_OS=?, ORIG_OS=?, RESP_OS=?, TIPO_OS=?, EQUIP_OS=?, SETOR_OS=?, INFOS_OS=?, INIC_OS=?, TERM_OS=?, EXEC_OS=?, PARAM_OS=? WHERE COD_OS=?",
+                              (desc_os, orig_os, resp_os, tipo_os, equip_os, setor_os, infos_os, inic_os, term_os, exec_os, param_os, cod_os))
                     tkinter.messagebox.showinfo(
                         "Sucesso!", "A Ordem de Serviço foi alterada e Fechada!")
                 conn.commit()
@@ -243,6 +243,7 @@ def rep_os():
                 eos8.delete(0, 'end')
                 eos9.delete(0, 'end')
                 eos10.delete(0, 'end')
+                eos11.delete(0, 'end')
                 eos1.delete(0, 'end')
                 os.system("cls")
                 print("Informações Alteradas e Inseridas!")
@@ -275,7 +276,7 @@ def rep_os():
                     c = conn.cursor()
 
                     c.execute("UPDATE tb_OS SET HORA_OS=?, EXEC_OS=?, PARAM_OS=? WHERE COD_OS=?",
-                              (hora_os, exec_os, param_os, cod_os))
+                              (inic_os, term_os, exec_os, param_os, cod_os))
                 tkinter.messagebox.showinfo(
                     "Sucesso!", "A Ordem de Serviço foi Fechada!")
                 conn.commit()
@@ -288,6 +289,7 @@ def rep_os():
                 eos8.delete(0, 'end')
                 eos9.delete(0, 'end')
                 eos10.delete(0, 'end')
+                eos11.delete(0, 'end')
                 eos1.delete(0, 'end')
                 os.system("cls")
                 print("Informações inseridas!")
@@ -348,21 +350,27 @@ def rep_os():
     eos8 = tk.Entry(rep_os, width=60)
     eos8.grid(row=7, column=1, padx=10, pady=10)
 
-    los9 = tk.Label(rep_os, text="Horário de Execução", width=20)
+    los9 = tk.Label(rep_os, text="Horário de Início", width=20)
     los9.grid(row=8, column=0, padx=10, pady=10)
 
     eos9 = tk.Entry(rep_os, width=60)
     eos9.grid(row=8, column=1, padx=10, pady=10)
 
+    los11 = tk.Label(rep_os, text="Horário de Término", width=20)
+    los11.grid(row=9, column=0, padx=10, pady=10)
+
+    eos11 = tk.Entry(rep_os, width=60)
+    eos11.grid(row=9, column=1, padx=10, pady=10)
+
     los10 = tk.Label(rep_os, text="Executor", width=20)
-    los10.grid(row=9, column=0, padx=10, pady=10)
+    los10.grid(row=10, column=0, padx=10, pady=10)
 
     eos10 = tk.Entry(rep_os, width=60)
-    eos10.grid(row=9, column=1, padx=10, pady=10)
+    eos10.grid(row=10, column=1, padx=10, pady=10)
 
     save_button = tk.Button(rep_os, text="Fechar O.S",
                             command=save_data, width=15)
-    save_button.grid(row=10, column=0, columnspan=1, padx=10, pady=10)
+    save_button.grid(row=11, column=0, columnspan=1, padx=10, pady=10)
 
     browse_button = tk.Button(rep_os, text="Busca", command=browse, width=15)
     browse_button.grid(row=0, column=2, columnspan=1, padx=10, pady=10)
@@ -372,7 +380,6 @@ def rep_os():
     cancel_button.grid(row=1, column=2, columnspan=4, padx=10, pady=10)
 
     # Função que gera a interface do cadastro de solicitação de serviço
-
 
 def cad_ss():
     cad_ss = tk.Toplevel()
@@ -482,7 +489,6 @@ def cad_ss():
 
     # Função que gera a interface do cadastro de peças
 
-
 def cad_eqp():
     cad_eq = tk.Toplevel()
     cad_eq.title("Cadastro de Equipamentos")
@@ -563,10 +569,7 @@ def cad_eqp():
     cancel_button = tk.Button(cad_eq, text="Cancelar", command=cancelar)
     cancel_button.grid(row=4, column=1, columnspan=4, padx=90, pady=10)
 
-    # Função para gerar a interface do Menu
-
     # Função que gera a interface do cadastro de peças
-
 
 def cad_pcs():
     cad_pc = tk.Toplevel()
@@ -668,7 +671,6 @@ def cad_pcs():
 
     # Função que gera a interface do cadastro de peças
 
-
 def cad_fun():
     cad_f = tk.Toplevel()
     cad_f.title("Cadastro de Funcionários")
@@ -751,7 +753,6 @@ def cad_fun():
 
     # Função que gera a interface do cadastro de setores
 
-
 def cad_set():
     cad_se = tk.Toplevel()
     cad_se.title("Cadastro de Setores")
@@ -826,7 +827,6 @@ def cad_set():
 
     # Função para gerar gerar a interface das O.S's em Aberto
 
-
 def abe_os():
     ab_os = tk.Tk()
     ab_os.title("Ordens em Aberto")
@@ -840,20 +840,19 @@ def abe_os():
         c.execute('SELECT * FROM tb_OS')
         rows = c.fetchall()
 
-    lab= tk.Label(ab_os, text='O.S')
+    lab = tk.Label(ab_os, text='O.S')
     lab.grid(row=0, columns=1)
 
-    i=1
+    i = 1
     for row in rows:
         j = 0
         for col in row:
             lab = tk.Label(ab_os, text=col)
             lab.grid(row=i, column=j)
-            j=j+1
-        i=i+1
+            j = j+1
+        i = i+1
 
     # Função para gerar a interface do Menu principal
-
 
 def main():
     main_menu = tk.Tk()
@@ -908,7 +907,6 @@ def main():
     c_left.grid(row=9, column=1, padx=10, pady=70)
 
     main_menu.mainloop()
-
 
 if __name__ == "__main__":
     main()
