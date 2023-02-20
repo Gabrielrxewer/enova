@@ -1,7 +1,7 @@
 ## ----------------------------------------------------##
 
 ###  Copyright (c) [2023] [Gabriel-Roewer-Pilger]    ###
-###   Version (1.5) Updated in [20.02.2023]          ###
+###   Version (1.6) Updated in [20.02.2023]          ###
 
 ## ----------------------------------------------------##
 
@@ -49,12 +49,11 @@ def cad_os():
     def save_data():
         cod_os = eos1.get()
         desc_os = eos2.get()
-        orig_os = eos3.get()
-        resp_os = eos4.get()
-        tipo_os = eos5.get()
-        equip_os = eos6.get()
-        setor_os = eos7.get()
-        infos_os = eos8.get()
+        resp_os = eos3.get()
+        tipo_os = eos4.get()
+        equip_os = eos5.get()
+        setor_os = eos6.get()
+        infos_os = eos7.get()
         global param_os
         param_os = 1
 
@@ -62,15 +61,15 @@ def cad_os():
 
         # Condição que verifica se os campos obrigatórios estão preenchidos
 
-        if eos2.get() == "" or eos3.get() == "" or eos4.get() == "" or eos5.get() == "" or eos6.get() == "" or eos7.get() == "" or eos8.get() == "":
+        if eos2.get() == "" or eos3.get() == "" or eos4.get() == "" or eos5.get() == "" or eos6.get() == "" or eos7.get() == "":
             tkinter.messagebox.showerror(
                 "Erro!", "Todos os campos precisam ser preenchidos!")
         else:
             with sqlite3.connect("C:\\Users\\inspe\\Desktop\\Qualidade\\Projetos py\\os.db") as conn:
                 c = conn.cursor()
 
-                c.execute("INSERT INTO tb_OS (COD_OS, DESC_OS, ORIG_OS, RESP_OS, TIPO_OS, EQUIP_OS, SETOR_OS, INFOS_OS, PARAM_OS) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
-                          (cod_os, desc_os, orig_os, resp_os, tipo_os, equip_os, setor_os, infos_os, param_os))
+                c.execute("INSERT INTO tb_OS (COD_OS, DESC_OS, RESP_OS, TIPO_OS, EQUIP_OS, SETOR_OS, INFOS_OS, PARAM_OS) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
+                          (cod_os, desc_os, resp_os, tipo_os, equip_os, setor_os, infos_os, param_os))
 
                 # Parâmetro para limpar os campos após salvar os dados
 
@@ -81,7 +80,6 @@ def cad_os():
                 eos5.delete(0, 'end')
                 eos6.delete(0, 'end')
                 eos7.delete(0, 'end')
-                eos8.delete(0, 'end')
                 eos1.delete(0, 'end')
                 eos1.insert(0, str(get_last_code()).zfill(3))
                 os.system("cls")
@@ -94,6 +92,9 @@ def cad_os():
         print("Janela fechada")
 
     # Impressão da interface
+
+    conn = sqlite3.connect('os.db')
+    c = conn.cursor()
 
     los1 = tk.Label(cad_os, text="Código da O.S", width=20)
     los1.grid(row=0, column=0, padx=70, pady=10)
@@ -108,47 +109,49 @@ def cad_os():
     eos2 = tk.Entry(cad_os, width=80)
     eos2.grid(row=1, column=1, padx=10, pady=10)
 
-    los3 = tk.Label(cad_os, text="Origem O.S", width=20)
+    los3 = tk.Label(cad_os, text="Responsável pela O.S", width=20)
     los3.grid(row=2, column=0, padx=10, pady=10)
 
-    eos3 = tk.Entry(cad_os, width=80)
-    eos3.grid(row=2, column=1, padx=10, pady=10)
+    c.execute('SELECT NOME_FUN FROM tb_FUN')
+    valores = [row[0] for row in c.fetchall()]
+    eos3 = ttk.Combobox(cad_os, values=valores, width=77)
+    eos3.grid(row=2, column=1)
 
-    los4 = tk.Label(cad_os, text="Responsável pela O.S", width=20)
+    los4 = tk.Label(cad_os, text="Tipo da O.S", width=20)
     los4.grid(row=3, column=0, padx=10, pady=10)
 
-    eos4 = tk.Entry(cad_os, width=80)
-    eos4.grid(row=3, column=1, padx=10, pady=10)
+    c.execute('SELECT TIPO_TI FROM tb_TIP')
+    valores = [row[0] for row in c.fetchall()]
+    eos4 = ttk.Combobox(cad_os, values=valores, width=77)
+    eos4.grid(row=3, column=1)
 
-    los5 = tk.Label(cad_os, text="Tipo da O.S", width=20)
+    los5 = tk.Label(cad_os, text="Equipamento", width=20)
     los5.grid(row=4, column=0, padx=10, pady=10)
 
-    eos5 = tk.Entry(cad_os, width=80)
-    eos5.grid(row=4, column=1, padx=10, pady=10)
+    c.execute('SELECT DESC_EQP FROM tb_EQP')
+    valores = [row[0] for row in c.fetchall()]
+    eos5 = ttk.Combobox(cad_os, values=valores, width=77)
+    eos5.grid(row=4, column=1)
 
-    los6 = tk.Label(cad_os, text="Equipamento", width=20)
+    los6 = tk.Label(cad_os, text="Setor", width=20)
     los6.grid(row=5, column=0, padx=10, pady=10)
 
-    eos6 = tk.Entry(cad_os, width=80)
-    eos6.grid(row=5, column=1, padx=10, pady=10)
+    c.execute('SELECT DESC_SET FROM tb_SET')
+    valores = [row[0] for row in c.fetchall()]
+    eos6 = ttk.Combobox(cad_os, values=valores, width=77)
+    eos6.grid(row=5, column=1)
 
-    los7 = tk.Label(cad_os, text="Setor", width=20)
+    los7 = tk.Label(cad_os, text="Informações", width=20)
     los7.grid(row=6, column=0, padx=10, pady=10)
 
     eos7 = tk.Entry(cad_os, width=80)
     eos7.grid(row=6, column=1, padx=10, pady=10)
 
-    los8 = tk.Label(cad_os, text="Informações", width=20)
-    los8.grid(row=7, column=0, padx=10, pady=10)
-
-    eos8 = tk.Entry(cad_os, width=80)
-    eos8.grid(row=7, column=1, padx=10, pady=10)
-
     save_button = tk.Button(cad_os, text="Gerar O.S", command=save_data)
-    save_button.grid(row=9, column=0, columnspan=1, padx=10, pady=10)
+    save_button.grid(row=8, column=0, columnspan=1, padx=10, pady=10)
 
     cancel_button = tk.Button(cad_os, text="Cancelar", command=cancelar)
-    cancel_button.grid(row=9, column=1, columnspan=4, padx=90, pady=10)
+    cancel_button.grid(row=8, column=1, columnspan=4, padx=90, pady=10)
 
 # Função para realizar o report de O.S
 
@@ -482,7 +485,7 @@ def cad_ss():
     ess6 = tk.Entry(cad_ss, width=80)
     ess6.grid(row=6, column=1, padx=10, pady=10)
 
-    save_button = tk.Button(cad_ss, text="Gerar S.S", command=save_data)
+    save_button = tk.Button(cad_ss, text="Cadastrar", command=save_data)
     save_button.grid(row=9, column=0, columnspan=1, padx=10, pady=10)
 
     cancel_button = tk.Button(cad_ss, text="Cancelar", command=cancelar)
@@ -513,7 +516,9 @@ def cad_eqp():
     def save_data():
         cod_eqp = eeqp1.get()
         desc_eqp = eeqp2.get()
-        setor_eqp = eeqp3.get()
+        fab_eqp = eeqp3.get()
+        mod_eqp = eeqp4.get()
+
 
         # Condição que verifica se os campos obrigatórios estão preenchidos
 
@@ -524,8 +529,8 @@ def cad_eqp():
             with sqlite3.connect("C:\\Users\\inspe\\Desktop\\Qualidade\\Projetos py\\os.db") as conn:
                 c = conn.cursor()
 
-                c.execute("INSERT INTO tb_EQP (COD_EQP, DESC_EQP, SETOR_EQP) VALUES (?, ?, ?)",
-                          (cod_eqp, desc_eqp, setor_eqp))
+                c.execute("INSERT INTO tb_EQP (COD_EQP, DESC_EQP, FAB_EQP, MOD_EQP) VALUES (?, ?, ?, ?)",
+                          (cod_eqp, desc_eqp, fab_eqp, mod_eqp))
 
                 # Parâmetro para limpar os campos após salvar os dados
 
@@ -545,6 +550,9 @@ def cad_eqp():
 
     # Impressão da interface
 
+    conn = sqlite3.connect('os.db')
+    c = conn.cursor()
+
     leqp1 = tk.Label(cad_eq, text="Código", width=20)
     leqp1.grid(row=1, column=0, padx=10, pady=10)
 
@@ -558,17 +566,23 @@ def cad_eqp():
     eeqp2 = tk.Entry(cad_eq, width=80)
     eeqp2.grid(row=2, column=1, padx=10, pady=10)
 
-    leqp3 = tk.Label(cad_eq, text="Setor", width=20)
-    leqp3.grid(row=3, column=0, padx=10, pady=10)
+    leqp3 = tk.Label(cad_eq, text="Fabricante", width=20)
+    leqp3.grid(row=4, column=0, padx=10, pady=10)
 
     eeqp3 = tk.Entry(cad_eq, width=80)
-    eeqp3.grid(row=3, column=1, padx=10, pady=10)
+    eeqp3.grid(row=4, column=1, padx=10, pady=10)
 
-    save_button = tk.Button(cad_eq, text="Gerar S.S", command=save_data)
-    save_button.grid(row=4, column=0, columnspan=1, padx=10, pady=10)
+    leqp4 = tk.Label(cad_eq, text="Modelo", width=20)
+    leqp4.grid(row=5, column=0, padx=10, pady=10)
+
+    eeqp4 = tk.Entry(cad_eq, width=80)
+    eeqp4.grid(row=5, column=1, padx=10, pady=10)
+
+    save_button = tk.Button(cad_eq, text="Cadastrar", command=save_data)
+    save_button.grid(row=6, column=0, columnspan=1, padx=10, pady=10)
 
     cancel_button = tk.Button(cad_eq, text="Cancelar", command=cancelar)
-    cancel_button.grid(row=4, column=1, columnspan=4, padx=90, pady=10)
+    cancel_button.grid(row=6, column=1, columnspan=4, padx=90, pady=10)
 
     # Função que gera a interface do cadastro de peças
 
@@ -727,6 +741,9 @@ def cad_fun():
 
     # Impressão da interface
 
+    conn = sqlite3.connect('os.db')
+    c = conn.cursor()
+
     lfun1 = tk.Label(cad_f, text="Código do Funcionário", width=20)
     lfun1.grid(row=1, column=0, padx=10, pady=10)
 
@@ -743,8 +760,10 @@ def cad_fun():
     lfun3 = tk.Label(cad_f, text="Setor do Funcionário", width=20)
     lfun3.grid(row=3, column=0, padx=10, pady=10)
 
-    efun3 = tk.Entry(cad_f, width=80)
-    efun3.grid(row=3, column=1, padx=10, pady=10)
+    c.execute('SELECT DESC_SET FROM tb_SET')
+    valores = [row[0] for row in c.fetchall()]
+    efun3 = ttk.Combobox(cad_f, values=valores, width=77)
+    efun3.grid(row=3, column=1)
 
     save_button = tk.Button(cad_f, text="Cadastrar", command=save_data)
     save_button.grid(row=4, column=0, columnspan=1, padx=10, pady=10)
