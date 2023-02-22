@@ -1,7 +1,7 @@
 ## ----------------------------------------------------##
 
 ###  Copyright (c) [2023] [Gabriel-Roewer-Pilger]    ###
-###   Version (1.7) Updated in [22.02.2023]          ###
+###   Version (1.8) Updated in [22.02.2023]          ###
 
 ## ----------------------------------------------------##
 
@@ -32,6 +32,7 @@ def cad_os():
     # Função para conferir o último Código da O.S no banco de dados e definir o próximo código
 
     def get_last_code():
+        eos1.config(state="normal")
         with sqlite3.connect("C:\\Users\\inspe\\Desktop\\Qualidade\\Projetos py\\os.db") as conn:
             c = conn.cursor()
 
@@ -74,6 +75,7 @@ def cad_os():
                 # Parâmetro para limpar os campos após salvar os dados
 
                 conn.commit()
+                eos1.config(state="normal")
                 eos2.delete(0, 'end')
                 eos3.delete(0, 'end')
                 eos4.delete(0, 'end')
@@ -84,6 +86,7 @@ def cad_os():
                 eos1.insert(0, str(get_last_code()).zfill(3))
                 os.system("cls")
                 print("Informações inseridas!")
+                eos1.config(state="disabled")
 
     # Função para fechamento da interface
 
@@ -102,6 +105,7 @@ def cad_os():
     eos1 = tk.Entry(cad_os, width=80)
     eos1.insert(0, str(get_last_code()).zfill(3))
     eos1.grid(row=0, column=1, padx=10, pady=10)
+    eos1.config(state="disabled")
 
     los2 = tk.Label(cad_os, text="Descrição da O.S", width=20)
     los2.grid(row=1, column=0, padx=10, pady=10)
@@ -397,6 +401,7 @@ def cad_ss():
     # Função para conferir o último Código da O.S no banco de dados e definir o próximo código
 
     def get_last_code():
+        ess1.config(state="normal")
         with sqlite3.connect("C:\\Users\\inspe\\Desktop\\Qualidade\\Projetos py\\os.db") as conn:
             c = conn.cursor()
 
@@ -408,6 +413,7 @@ def cad_ss():
                 last_code = 0
             new_code = int(last_code) + 1
             return new_code
+
 
     def save_data():
         cod_ss = ess1.get()
@@ -432,6 +438,7 @@ def cad_ss():
                 # Parâmetro para limpar os campos após salvar os dados
 
                 conn.commit()
+                ess1.config(state="normal")
                 ess2.delete(0, 'end')
                 ess3.delete(0, 'end')
                 ess4.delete(0, 'end')
@@ -441,6 +448,7 @@ def cad_ss():
                 ess1.insert(0, str(get_last_code()).zfill(3))
                 os.system("cls")
                 print("Informações inseridas!")
+                ess1.config(state="disabled")
 
     # Função para fechamento da interface
 
@@ -450,11 +458,15 @@ def cad_ss():
 
     # Impressão da interface
 
+    conn = sqlite3.connect('os.db')
+    c = conn.cursor()
+
     lss1 = tk.Label(cad_ss, text="Código", width=20)
     lss1.grid(row=1, column=0, padx=10, pady=10)
 
     ess1 = tk.Entry(cad_ss, width=80)
     ess1.insert(0, str(get_last_code()).zfill(3))
+    ess1.config(state="disabled")
     ess1.grid(row=1, column=1, padx=10, pady=10)
 
     lss2 = tk.Label(cad_ss, text="Descrição", width=20)
@@ -466,20 +478,26 @@ def cad_ss():
     lss3 = tk.Label(cad_ss, text="Setor", width=20)
     lss3.grid(row=3, column=0, padx=10, pady=10)
 
-    ess3 = tk.Entry(cad_ss, width=80)
-    ess3.grid(row=3, column=1, padx=10, pady=10)
+    c.execute('SELECT DESC_SET FROM tb_SET')
+    valores = [row[0] for row in c.fetchall()]
+    ess3 = ttk.Combobox(cad_ss, values=valores, width=77)
+    ess3.grid(row=3, column=1)
 
     lss4 = tk.Label(cad_ss, text="Responsável", width=20)
     lss4.grid(row=4, column=0, padx=10, pady=10)
 
-    ess4 = tk.Entry(cad_ss, width=80)
-    ess4.grid(row=4, column=1, padx=10, pady=10)
+    c.execute('SELECT NOME_FUN FROM tb_FUN')
+    valores = [row[0] for row in c.fetchall()]
+    ess4 = ttk.Combobox(cad_ss, values=valores, width=77)
+    ess4.grid(row=4, column=1)
 
     lss5 = tk.Label(cad_ss, text="Equipamento", width=20)
     lss5.grid(row=5, column=0, padx=10, pady=10)
 
-    ess5 = tk.Entry(cad_ss, width=80)
-    ess5.grid(row=5, column=1, padx=10, pady=10)
+    c.execute('SELECT DESC_EQP FROM tb_EQP')
+    valores = [row[0] for row in c.fetchall()]
+    ess5 = ttk.Combobox(cad_ss, values=valores, width=77)
+    ess5.grid(row=5, column=1)
 
     lss6 = tk.Label(cad_ss, text="Informações adicionais", width=20)
     lss6.grid(row=6, column=0, padx=10, pady=10)
@@ -504,6 +522,7 @@ def cad_eqp():
     cad_eq.iconbitmap(default=icon)
 
     def get_last_code():
+        eeqp1.config(state="normal")
         with sqlite3.connect("C:\\Users\\inspe\\Desktop\\Qualidade\\Projetos py\\os.db") as conn:
             c = conn.cursor()
 
@@ -537,12 +556,15 @@ def cad_eqp():
                 # Parâmetro para limpar os campos após salvar os dados
 
                 conn.commit()
+                eeqp1.config(state="normal")
                 eeqp2.delete(0, 'end')
                 eeqp3.delete(0, 'end')
+                eeqp4.delete(0, 'end')
                 eeqp1.delete(0, 'end')
                 eeqp1.insert(0, str(get_last_code()).zfill(3))
                 os.system("cls")
                 print("Informações inseridas!")
+                eeqp1.config(state="disabled")
 
     # Função para fechamento da interface
 
@@ -560,6 +582,7 @@ def cad_eqp():
 
     eeqp1 = tk.Entry(cad_eq, width=80)
     eeqp1.insert(0, str(get_last_code()).zfill(3))
+    eeqp1.config(state="disabled")
     eeqp1.grid(row=1, column=1, padx=10, pady=10)
 
     leqp2 = tk.Label(cad_eq, text="Descrição", width=20)
@@ -597,6 +620,7 @@ def cad_pcs():
     cad_pc.iconbitmap(default=icon)
 
     def get_last_code():
+        epc1.config(state="normal")
         with sqlite3.connect("C:\\Users\\inspe\\Desktop\\Qualidade\\Projetos py\\os.db") as conn:
             c = conn.cursor()
 
@@ -631,6 +655,7 @@ def cad_pcs():
                 # Parâmetro para limpar os campos após salvar os dados
 
                 conn.commit()
+                epc1.config(state="normal")
                 epc2.delete(0, 'end')
                 epc3.delete(0, 'end')
                 epc4.delete(0, 'end')
@@ -639,6 +664,7 @@ def cad_pcs():
                 epc1.insert(0, str(get_last_code()).zfill(3))
                 os.system("cls")
                 print("Informações inseridas!")
+                epc1.config(state="disabled")
 
     # Função para fechamento da interface
 
@@ -653,6 +679,7 @@ def cad_pcs():
 
     epc1 = tk.Entry(cad_pc, width=80)
     epc1.insert(0, str(get_last_code()).zfill(3))
+    epc1.config(state="disabled")
     epc1.grid(row=1, column=1, padx=10, pady=10)
 
     lcp2 = tk.Label(cad_pc, text="Descrição", width=20)
@@ -698,6 +725,7 @@ def cad_fun():
     cad_f.iconbitmap(default=icon)
 
     def get_last_code():
+        efun1.config(state="normal")
         with sqlite3.connect("C:\\Users\\inspe\\Desktop\\Qualidade\\Projetos py\\os.db") as conn:
             c = conn.cursor()
 
@@ -730,12 +758,14 @@ def cad_fun():
                 # Parâmetro para limpar os campos após salvar os dados
 
                 conn.commit()
+                efun1.config(state="normal")
                 efun2.delete(0, 'end')
                 efun3.delete(0, 'end')
                 efun1.delete(0, 'end')
                 efun1.insert(0, str(get_last_code()).zfill(3))
                 os.system("cls")
                 print("Informações inseridas!")
+                efun1.config(state="disabled")
 
     # Função para fechamento da interface
 
@@ -753,6 +783,7 @@ def cad_fun():
 
     efun1 = tk.Entry(cad_f, width=80)
     efun1.insert(0, str(get_last_code()).zfill(3))
+    efun1.config(state="disabled")
     efun1.grid(row=1, column=1, padx=10, pady=10)
 
     lfun2 = tk.Label(cad_f, text="Nome do Funcionário", width=20)
@@ -786,6 +817,7 @@ def cad_set():
     cad_se.iconbitmap(default=icon)
 
     def get_last_code():
+        eset1.config(state="normal")
         with sqlite3.connect("C:\\Users\\inspe\\Desktop\\Qualidade\\Projetos py\\os.db") as conn:
             c = conn.cursor()
 
@@ -817,11 +849,13 @@ def cad_set():
                 # Parâmetro para limpar os campos após salvar os dados
 
                 conn.commit()
+                eset1.config(state="normal")
                 eset2.delete(0, 'end')
                 eset1.delete(0, 'end')
                 eset1.insert(0, str(get_last_code()).zfill(3))
                 os.system("cls")
                 print("Informações inseridas!")
+                eset1.config(state="disabled")
 
     # Função para fechamento da interface
 
@@ -836,6 +870,7 @@ def cad_set():
 
     eset1 = tk.Entry(cad_se, width=80)
     eset1.insert(0, str(get_last_code()).zfill(3))
+    eset1.config(state="disabled")
     eset1.grid(row=1, column=1, padx=10, pady=10)
 
     lset2 = tk.Label(cad_se, text="Nome do Setor", width=20)
@@ -880,7 +915,7 @@ def abe_os():
 
     descriptions = ['Código', 'Descrição', 'Responsável', 'Tipo', 'Equipamento',
                     'Setor', 'Informações', 'Data - Início', 'Data - Término', 'Executante']
-    widths = [4, 25, 16, 10, 20, 15, 30, 15, 15, 16]
+    widths = [4, 25, 16, 14, 20, 15, 30, 15, 15, 16]
     for j, desc in enumerate(descriptions):
         desc_lab = tk.Label(
             frame, text=desc, width=widths[j], anchor='w', bg='yellow')
