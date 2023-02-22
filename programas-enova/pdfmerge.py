@@ -26,19 +26,23 @@ def merge_and_print():
     merged_pdf = PdfMerger()
 
     # Loop através dos arquivos PDF na pasta
-    for filename in os.listdir(dir_path.get()):
-        if filename.endswith(".pdf"):
-            pdf_path = os.path.join(dir_path.get(), filename)
-            with open(pdf_path, "rb") as f:
-                pdf = PdfReader(f)
-                merged_pdf.append(pdf)
+    try:
+        for filename in os.listdir(dir_path.get()):
+            if filename.endswith(".pdf"):
+                pdf_path = os.path.join(dir_path.get(), filename)
+                with open(pdf_path, "rb") as f:
+                    pdf = PdfReader(f)
+                    merged_pdf.append(pdf)
 
-    # Salva o PDF unificado em um arquivo
-    output_path = os.path.join(dir_path.get(), "merged.pdf")
-    with open(output_path, "wb") as f:
-        merged_pdf.write(f)
-        tkinter.messagebox.showinfo(
-            "Sucesso!", "Os arquivos PDF foram Unidos com Sucesso!")
+        # Salva o PDF unificado em um arquivo
+        output_path = os.path.join(dir_path.get(), "merged.pdf")
+        with open(output_path, "wb") as f:
+            merged_pdf.write(f)
+            tkinter.messagebox.showinfo(
+                "Sucesso!", "Os arquivos PDF foram Unidos com Sucesso!")
+    except:
+            tkinter.messagebox.showerror(
+                "Erro!", "Código não encontrado!")
 
 def cancel_button():
     root.destroy()

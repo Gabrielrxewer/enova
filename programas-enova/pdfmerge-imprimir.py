@@ -3,6 +3,7 @@ import win32api
 from tkinter import *
 from tkinter import filedialog
 from PyPDF2 import PdfMerger, PdfReader
+import tkinter.messagebox
 
 # Define a janela principal
 root = Tk()
@@ -25,22 +26,27 @@ def merge_and_print():
     # Inicializa o objeto PdfFileMerger
     merged_pdf = PdfMerger()
 
-    # Loop através dos arquivos PDF na pasta
-    for filename in os.listdir(dir_path.get()):
-        if filename.endswith(".pdf"):
-            pdf_path = os.path.join(dir_path.get(), filename)
-            with open(pdf_path, "rb") as f:
-                pdf = PdfReader(f)
-                merged_pdf.append(pdf)
+    try:
+        # Loop através dos arquivos PDF na pasta
+        for filename in os.listdir(dir_path.get()):
+            if filename.endswith(".pdf"):
+                pdf_path = os.path.join(dir_path.get(), filename)
+                with open(pdf_path, "rb") as f:
+                    pdf = PdfReader(f)
+                    merged_pdf.append(pdf)
 
-    # Salva o PDF unificado em um arquivo
-    output_path = os.path.join(dir_path.get(), "merged.pdf")
-    with open(output_path, "wb") as f:
-        merged_pdf.write(f)
+        # Salva o PDF unificado em um arquivo
+        output_path = os.path.join(dir_path.get(), "merged.pdf")
+        with open(output_path, "wb") as f:
+            merged_pdf.write(f)
 
     # Imprime o PDF unificado
-    win32api.ShellExecute(0, "print", output_path, None, ".", 0)
-
+        win32api.ShellExecute(0, "print", output_path, None, ".", 0)
+        tkinter.messagebox.showinfo(
+            "Sucesso!", "Os arquivos PDF foram Unidos com Sucesso!")
+    except:
+        tkinter.messagebox.showerror(
+            "Erro!", "Código não encontrado!")
 
 def cancel_button():
     root.destroy()
