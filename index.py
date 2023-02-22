@@ -1,7 +1,7 @@
 ## ----------------------------------------------------##
 
 ###  Copyright (c) [2023] [Gabriel-Roewer-Pilger]    ###
-###   Version (1.6) Updated in [20.02.2023]          ###
+###   Version (1.7) Updated in [22.02.2023]          ###
 
 ## ----------------------------------------------------##
 
@@ -155,6 +155,7 @@ def cad_os():
 
 # Função para realizar o report de O.S
 
+
 def rep_os():
     rep_os = tk.Toplevel()
     rep_os.title("Report de O.S")
@@ -201,7 +202,7 @@ def rep_os():
         inic_os = eos8.get()
         term_os = eos9.get()
         exec_os = eos10.get()
-        param_os=2
+        param_os = 2
         try:
 
             # Condição que verifica se os campos obrigatórios estão preenchidos e retorna uma confirmação
@@ -209,7 +210,7 @@ def rep_os():
             if eos1.get() == "" or eos2.get() == "" or eos3.get() == "" or eos4.get() == "" or eos5.get() == "" or eos6.get() == "" or eos7.get() == "" or eos8.get() == "" or eos9.get() == "" or eos10.get() == "":
                 tkinter.messagebox.showerror(
                     "Erro!", "Todos os campos precisam ser preenchidos!")
-                res2 = 2      
+                res2 = 2
 
             # Condição que verifica se as informações já existentes foram alteradas
 
@@ -361,7 +362,7 @@ def rep_os():
     los9 = tk.Label(rep_os, text="Horário de Término", width=20)
     los9.grid(row=8, column=0, padx=10, pady=10)
 
-    eos9= tk.Entry(rep_os, width=60)
+    eos9 = tk.Entry(rep_os, width=60)
     eos9.grid(row=8, column=1, padx=10, pady=10)
 
     los10 = tk.Label(rep_os, text="Executor", width=20)
@@ -384,6 +385,7 @@ def rep_os():
     cancel_button.grid(row=1, column=2, columnspan=4, padx=10, pady=10)
 
     # Função que gera a interface do cadastro de solicitação de serviço
+
 
 def cad_ss():
     cad_ss = tk.Toplevel()
@@ -493,6 +495,7 @@ def cad_ss():
 
     # Função que gera a interface do cadastro de peças
 
+
 def cad_eqp():
     cad_eq = tk.Toplevel()
     cad_eq.title("Cadastro de Equipamentos")
@@ -518,7 +521,6 @@ def cad_eqp():
         desc_eqp = eeqp2.get()
         fab_eqp = eeqp3.get()
         mod_eqp = eeqp4.get()
-
 
         # Condição que verifica se os campos obrigatórios estão preenchidos
 
@@ -585,6 +587,7 @@ def cad_eqp():
     cancel_button.grid(row=6, column=1, columnspan=4, padx=90, pady=10)
 
     # Função que gera a interface do cadastro de peças
+
 
 def cad_pcs():
     cad_pc = tk.Toplevel()
@@ -686,6 +689,7 @@ def cad_pcs():
 
     # Função que gera a interface do cadastro de peças
 
+
 def cad_fun():
     cad_f = tk.Toplevel()
     cad_f.title("Cadastro de Funcionários")
@@ -773,6 +777,7 @@ def cad_fun():
 
     # Função que gera a interface do cadastro de setores
 
+
 def cad_set():
     cad_se = tk.Toplevel()
     cad_se.title("Cadastro de Setores")
@@ -847,6 +852,7 @@ def cad_set():
 
     # Função para gerar gerar a interface das O.S's em Aberto
 
+
 def abe_os():
     ab_os = tk.Tk()
     ab_os.title("Ordens em Aberto")
@@ -854,26 +860,45 @@ def abe_os():
     ab_os.iconbitmap(default=icon)
     ab_os.config(bg='#202020')
 
+    canvas = tk.Canvas(ab_os)
+    canvas.pack(side="left", fill="both", expand=True)
+
+    scrollbar = tk.Scrollbar(ab_os, orient="vertical", command=canvas.yview)
+    scrollbar.pack(side="right", fill="y")
+
+    canvas.configure(yscrollcommand=scrollbar.set)
+
+    frame = tk.Frame(canvas)
+    canvas.create_window((0, 0), window=frame, anchor='nw')
+
     with sqlite3.connect("C:\\Users\\inspe\\Desktop\\Qualidade\\Projetos py\\os.db") as conn:
         c = conn.cursor()
 
-        c.execute('SELECT COD_OS, DESC_OS, RESP_OS, TIPO_OS, EQUIP_OS, SETOR_OS, INFOS_OS, INIC_OS, TERM_OS, EXEC_OS FROM tb_OS')
+        c.execute(
+            'SELECT COD_OS, DESC_OS, RESP_OS, TIPO_OS, EQUIP_OS, SETOR_OS, INFOS_OS, INIC_OS, TERM_OS, EXEC_OS FROM tb_OS')
         rows = c.fetchall()
 
-    descriptions= ['Código', 'Descrição', 'Responsável', 'Tipo', 'Equipamento', 'Setor', 'Informações','Data - Início', 'Data - Término', 'Executante']
-    widths = [8, 20, 12, 10, 20, 10, 30, 20, 20, 12]
+    descriptions = ['Código', 'Descrição', 'Responsável', 'Tipo', 'Equipamento',
+                    'Setor', 'Informações', 'Data - Início', 'Data - Término', 'Executante']
+    widths = [4, 25, 16, 10, 20, 15, 30, 15, 15, 16]
+    for j, desc in enumerate(descriptions):
+        desc_lab = tk.Label(
+            frame, text=desc, width=widths[j], anchor='w', bg='yellow')
+        desc_lab.grid(row=0, column=j, padx=2, pady=5)
+
     i = 1
     for row in rows:
-        j = 0
-        for col in row:
-            desc_lab = tk.Label(ab_os, text=descriptions[j], width=widths[j], anchor='w', bg='yellow')
-            desc_lab.grid(row=0, column=j, padx=2, pady=5)
-            lab = tk.Label(ab_os, text=col, width=widths[j])
+        for j, col in enumerate(row):
+            lab = tk.Label(frame, text=col, width=widths[j])
             lab.grid(row=i, column=j, pady=1)
-            j = j+1
-        i = i+1
+        i += 1
+
+    frame.pack_propagate(False)
+
+    frame.bind("<Configure>", lambda e: canvas.configure(scrollregion=canvas.bbox("all")))
 
     # Função para gerar a interface do Menu principal
+
 
 def cad_tip():
     cad_se = tk.Toplevel()
@@ -894,7 +919,7 @@ def cad_tip():
             with sqlite3.connect("C:\\Users\\inspe\\Desktop\\Qualidade\\Projetos py\\os.db") as conn:
                 c = conn.cursor()
 
-                c.execute("INSERT INTO tb_TIP (TIPO_TI) VALUES (?)",(desc_tip,))
+                c.execute("INSERT INTO tb_TIP (TIPO_TI) VALUES (?)", (desc_tip,))
 
                 # Parâmetro para limpar os campos após salvar os dados
 
@@ -919,10 +944,52 @@ def cad_tip():
     cancel_button = tk.Button(cad_se, text="Cancelar", command=cancelar)
     cancel_button.grid(row=4, column=1, columnspan=4, padx=90, pady=10)
 
+
+def cad_eqv():
+    cad_eq = tk.Toplevel()
+    cad_eq.title("Equipamentos Cadastrados")
+    cad_eq.state('zoomed')
+    cad_eq.config(bg='#202020')
+    cad_eq.iconbitmap(default=icon)
+
+    canvas = tk.Canvas(cad_eq)
+    canvas.pack(side="left", fill="both", expand=True)
+    
+    scrollbar = tk.Scrollbar(cad_eq, orient="vertical", command=canvas.yview)
+    scrollbar.pack(side="right", fill="y")
+    
+    canvas.configure(yscrollcommand=scrollbar.set, width=800)
+    
+    frame = tk.Frame(canvas)
+    canvas.create_window((0, 0), window=frame, anchor='nw')
+
+    with sqlite3.connect("C:\\Users\\inspe\\Desktop\\Qualidade\\Projetos py\\os.db") as conn:
+        c = conn.cursor()
+
+        c.execute('SELECT DESC_EQP, FAB_EQP, MOD_EQP FROM tb_EQP')
+        rows = c.fetchall()
+
+    descriptions= ['Descrição', 'Fabricante', 'Modelo']
+    widths = [20, 20, 20]
+    i = 1
+    for row in rows:
+        row_frame = tk.Frame(frame)
+        row_frame.pack(side="top", fill="x", expand=True)
+        for j, col in enumerate(row):
+            desc_lab = tk.Label(row_frame, text=descriptions[j], width=widths[j], anchor='w', bg='yellow')
+            desc_lab.pack(side="left", padx=2, pady=5)
+            lab = tk.Label(row_frame, text=col, width=widths[j])
+            lab.pack(side="left", pady=1)
+        i = i+1
+    
+    canvas.update_idletasks()
+    scrollbar.config(command=canvas.yview)
+    canvas.config(scrollregion=canvas.bbox("all"))
+
 def main():
     main_menu = tk.Tk()
     main_menu.title("Menu-Cadastros")
-    main_menu.geometry("240x540")
+    main_menu.geometry("240x640")
     main_menu.iconbitmap(default=icon)
     main_menu.config(bg='#202020')
 
@@ -960,9 +1027,13 @@ def main():
                       command=rep_os, width=30)
     c_rep.grid(row=8, column=1, padx=10, pady=10)
 
-    c_abe = tk.Button(main_menu, text="O.S's em Aberto",
+    c_abe = tk.Button(main_menu, text="O.S's Cadastradas",
                       command=abe_os, width=30)
     c_abe.grid(row=9, column=1, padx=10, pady=10)
+
+    c_eqv = tk.Button(main_menu, text="Equipamentos Cadastrados",
+                      command=cad_eqv, width=30)
+    c_eqv.grid(row=10, column=1, padx=10, pady=10)
 
     # Função para fechar a interface
 
@@ -973,9 +1044,10 @@ def main():
     # Botão para fechar a interface
 
     c_left = tk.Button(main_menu, text="Sair", command=cancel_menu)
-    c_left.grid(row=10, column=1, padx=10, pady=70)
+    c_left.grid(row=11, column=1, padx=10, pady=70)
 
     main_menu.mainloop()
+
 
 if __name__ == "__main__":
     main()
