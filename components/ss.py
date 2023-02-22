@@ -12,7 +12,6 @@ import sqlite3
 import tkinter.messagebox
 import os
 from tkinter import ttk
-import oss
 
 # Variaveis de entrada
 
