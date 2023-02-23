@@ -48,6 +48,7 @@ def merge_and_print():
         tkinter.messagebox.showerror(
             "Erro!", "Código não encontrado!")
 
+
 def cancel_button():
     root.destroy()
 

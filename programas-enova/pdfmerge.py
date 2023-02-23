@@ -41,8 +41,9 @@ def merge_and_print():
             tkinter.messagebox.showinfo(
                 "Sucesso!", "Os arquivos PDF foram Unidos com Sucesso!")
     except:
-            tkinter.messagebox.showerror(
-                "Erro!", "Código não encontrado!")
+        tkinter.messagebox.showerror(
+            "Erro!", "Código não encontrado!")
+
 
 def cancel_button():
     root.destroy()
