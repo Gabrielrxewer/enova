@@ -72,4 +72,7 @@ cancel_button = Button(root, text="Cancelar", command=cancel_button)
 cancel_button.pack()
 
 # Executa a janela principal
+
+input("Pressione Enter para sair...")
+
 root.mainloop()
