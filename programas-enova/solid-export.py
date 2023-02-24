@@ -27,6 +27,8 @@ def export_files(filenames):
             swApp.CloseDoc(filename)
 
 root = tk.Tk()
+root.title("Solid Export")
+root.geometry("300x100")
 select_button = tk.Button(root, text="Selecionar Arquivos", command=select_files)
 select_button.pack()
 root.mainloop()
