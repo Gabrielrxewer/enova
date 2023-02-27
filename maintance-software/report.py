@@ -68,7 +68,7 @@ def rep_os():
         inic_os = eos8.get()
         term_os = eos9.get()
         exec_os = eos10.get()
-        param_os = 2
+        param_os = "Fechada"
         try:
 
             # Condição que verifica se os campos obrigatórios estão preenchidos e retorna uma confirmação

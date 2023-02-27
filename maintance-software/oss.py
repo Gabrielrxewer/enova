@@ -54,8 +54,7 @@ def cad_os():
         equip_os = eos5.get()
         setor_os = eos6.get()
         infos_os = eos7.get()
-        global param_os
-        param_os = 1
+        param_os = "Aberta"
 
         global res2
 
