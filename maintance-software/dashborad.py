@@ -1,3 +1,10 @@
+## ----------------------------------------------------##
+
+###  Copyright (c) [2023] [Gabriel-Roewer-Pilger]    ###
+###   Version (1.9) Updated in [27.02.2023]          ###
+
+## ----------------------------------------------------##
+
 import dash
 from dash import dcc, html
 import plotly.express as px

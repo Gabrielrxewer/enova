@@ -1,14 +1,14 @@
 ## ----------------------------------------------------##
 
 ###  Copyright (c) [2023] [Gabriel-Roewer-Pilger]    ###
-###   Version (1.8) Updated in [22.02.2023]          ###
+###   Version (1.9) Updated in [27.02.2023]          ###
 
 ## ----------------------------------------------------##
 
 # Bibliotecas necessárias para execução do código
 
 import tkinter as tk
-import oss, ss, report, setores, tiposmanut, pecas, ossabertas, funcionarios, equip, eqpcadastrados, viewss
+import oss, ss, report, setores, tiposmanut, pecas, relatoriospdf, funcionarios, equip, eqpcadastrados, viewss
 
 # Variaveis de entrada
 
@@ -57,9 +57,9 @@ def main():
                       command=report.rep_os, width=30)
     c_rep.grid(row=8, column=1, padx=10, pady=10)
 
-    c_abe = tk.Button(main_menu, text="O.S's Cadastradas",
-                      command=ossabertas.abe_os, width=30)
-    c_abe.grid(row=9, column=1, padx=10, pady=10)
+    c_relat = tk.Button(main_menu, text="Relatório de O.S's",
+                      command=relatoriospdf.relatorio, width=30)
+    c_relat.grid(row=9, column=1, padx=10, pady=10)
 
     c_eqv = tk.Button(main_menu, text="Equipamentos Cadastrados",
                       command=eqpcadastrados.cad_eqv, width=30)
