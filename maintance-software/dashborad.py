@@ -1,8 +1,6 @@
 ## ----------------------------------------------------##
-
 ###  Copyright (c) [2023] [Gabriel-Roewer-Pilger]    ###
 ###   Version (1.9) Updated in [27.02.2023]          ###
-
 ## ----------------------------------------------------##
 
 import dash
@@ -14,30 +12,32 @@ import pandas as pd
 # Conecte-se ao banco de dados SQLite3
 conn = sqlite3.connect('os.db')
 
-# Consulta SQL para obter dados da tabela
-query = 'SELECT COD_EQP, DESC_EQP FROM tb_EQP'
+# Consulta SQL para obter dados de PARAM_OS da tabela tb_EQP
+query = 'SELECT PARAM_OS FROM tb_OS'
 
 # Crie um DataFrame Pandas com os dados da tabela
 df = pd.read_sql(query, conn)
 
-# Defina as cores desejadas
-cores = {'COD_EQP': '#FFA07A', 'DESC_EQP': '#B0E0E6'}
+# Crie uma coluna no DataFrame com as categorias 'Aberto' ou 'Fechada', dependendo do valor de PARAM_OS
+df['status'] = df['PARAM_OS'].map({'Aberta': 'Aberta', 'Fechada': 'Fechada'})
 
-# Crie uma coluna no DataFrame com as cores correspondentes
-df['cores'] = df['COD_EQP'].map(cores)
+# Agrupe os dados por status e conte a quantidade de ocorrências de cada categoria
+df_count = df.groupby('status').size().reset_index(name='counts')
+
+# Defina as cores desejadas para cada categoria
+cores = {'Aberta': '#FFA07A', 'Fechada': '#B0E0E6'}
 
 # Crie um aplicativo Dash
 app = dash.Dash(__name__)
 
 # Defina o layout do dashboard
 app.layout = html.Div([
-    html.H1('Dashboard - CÓDIGO x DESCRIÇÃO'),
+    html.H1('Dashboard - Ordens em aberto - Ordens Fechadas'),
     dcc.Graph(
         id='grafico',
-        figure=px.scatter(df, x='COD_EQP', y='DESC_EQP', color='cores')
+        figure=px.pie(df_count, values='counts', names='status', color='status', color_discrete_map=cores)
     )
 ])
 
-# Inicie o servidor Dash
 if __name__ == '__main__':
     app.run_server(debug=True)
