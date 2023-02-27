@@ -51,7 +51,11 @@ try:
     ok_button = tk.Button(page_selection_window,
                           text="OK", command=on_ok_button)
     ok_button.pack()
+    
 except:
     print("erro")
+
+finally:
+    ok_button.destroy()
 
 page_selection_window.mainloop()
