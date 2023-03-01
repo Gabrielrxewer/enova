@@ -1,24 +1,25 @@
-# Enova
+# Enova - Projects
 
-**Software de manutenção** 
+**About Repository**
 
-O código é um protótipo, desenvolvido por Gabriel Roewer Pilger,
-um protótipo com o intuito de servir de apresentação para a Enova.
+This repository contains several automation projects developed by myself to meet the demands of the Engineering, Quality, and Maintenance departments of Enova.
 
-**Software para PDF Merge**
+**Abou Maintance-Software**
 
-O código é um Software para fazer o merge dos PDF's, desenvolvido
-por Gabriel Roewer Pilger e utilizado em produção na Enova.
+The Maintance-Software (v1.9.0) is a test version of a maintenance software developed by Gabriel Roewer Pilger. It is not yet operational in a production environment, but will be integrated into the process once its scope is better aligned.
 
-**Software para PDF Merge and Print**
+**About Other Projects**
 
-O código é um Software para fazer o merge e a impressão dos PDF'S
-desenvolvido por Gabriel Roewer Pilger e utilizado em produção na Enova.
+In the same repository, you will find a folder named "Programas-Enova" that contains simpler projects that are already in production and meeting the expected requirements, satisfying the needs of the department that requested the solution for the problems they solve.
 
-**Software para PDF Separator**
+**About Requeriments**
 
-O código é um Software para separar páginas de um PDF e transformá-las
-em novos PDF's, desenvolvido por Gabriel Roewer Pilger e Utilizado em 
-Produção na Enova.
+Regarding project dependencies, the code requires specific libraries to be installed, which are imported after the header of the .py file. You can install them using PIP.
+
+**About deadlines**
+
+As for deadlines, the maintenance software is being developed to meet the data storage demands of Enova's maintenance processes. There is no defined deadline, but constant updates are being made, and hard work is being done to finish the production-ready version as soon as possible!
 
 
+
+**Thanks! By: Gabriel Roewer**
