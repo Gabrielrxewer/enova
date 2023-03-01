@@ -5,7 +5,7 @@
 
 ## ----------------------------------------------------##
 
-# Bibliotecas necessárias para rodar a aplicação
+# Libraries required to run the application
 
 from reportlab.pdfgen import canvas
 import sqlite3
@@ -18,7 +18,7 @@ import tkinter.filedialog
 import os
 
 
-def relatorio():
+def generate_report():
     def create_pdf(param_os):
         conn = sqlite3.connect('os.db')
         cursor = conn.cursor()
@@ -34,7 +34,7 @@ def relatorio():
         pdf.drawImage('C:/Users/inspe/Desktop/Qualidade/Projetos py/programas-enova/logo.png',
                       0.75*inch, 10.3*inch, width=1.8*inch, height=0.5*inch)
         pdf.drawCentredString(4.50*inch, 10.5*inch,
-                              "Relatório: Ordens de Serviço")
+                              "Report: Service Orders")
         pdf.setFont("Helvetica-Bold", 11)
         pdf.drawRightString(7.25*inch, 10.5*inch, f"#{param_os}")
 
@@ -42,8 +42,8 @@ def relatorio():
 
         y = 8.75*inch
         pdf.drawString(0.75*inch, y, "ID")
-        pdf.drawString(1.55*inch, y, "Descrição")
-        pdf.drawString(3.75*inch, y, "Equipamento")
+        pdf.drawString(1.55*inch, y, "Description")
+        pdf.drawString(3.75*inch, y, "Equipment")
         pdf.drawString(6.25*inch, y, "Status")
         y -= 0.25*inch
 
@@ -59,36 +59,31 @@ def relatorio():
                       1.55*inch, -0.05*inch, width=1.5*inch, height=0.4*inch)
         pdf.setFont("Helvetica", 12)
         pdf.drawString(3.55*inch, 0.09*inch,
-                       f"Data do Relatório: 27 de Fevereiro de 2023")
+                       f"Report Date: March 1, 2023")
 
         pdf.save()
 
-    def generate_report():
-        param_os = combo.get()
-        create_pdf(param_os)
-        tkinter.messagebox.showinfo(
-            "Sucesso!", "Relatório impresso com sucesso!")
-
     def cancel():
-        relatorio.destroy()
+        report.destroy()
 
-    relatorio = Tk()
-    relatorio.geometry("400x200")
-    relatorio.title("Gerar relatório")
+    report = Tk()
+    report.geometry("400x200")
+    report.title("Generate report")
 
-    frame = Frame(relatorio)
+    frame = Frame(report)
     frame.pack(pady=20)
 
-    label = Label(frame, text="Selecione o status das OS's:")
+    label = Label(frame, text="Select the status of the Service Orders:")
     label.pack(side=LEFT)
 
-    statuses = ["Aberta", "Fechada"]
+    statuses = ["Open", "Closed"]
     combo = ttk.Combobox(frame, values=statuses)
     combo.current(0)
     combo.pack(side=LEFT)
 
-    button = Button(relatorio, text="Gerar Relatório", command=generate_report)
+    button = Button(report, text="Generate Report",
+                    command=lambda: create_pdf(combo.get()))
     button.pack(pady=10)
 
-    button = Button(relatorio, text="Cancelar", command=cancel)
+    button = Button(report, text="Cancel", command=cancel)
     button.pack(pady=10)

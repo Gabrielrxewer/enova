@@ -1,7 +1,7 @@
 ## ----------------------------------------------------##
 
 ###  Copyright (c) [2023] [Gabriel-Roewer-Pilger]    ###
-###   Version (1.9) Updated in [27.02.2023]          ###
+###   Version (1.9.1) Updated in [27.02.2023]          ###
 
 ## ----------------------------------------------------##
 
@@ -58,7 +58,7 @@ def main():
     c_rep.grid(row=8, column=1, padx=10, pady=10)
 
     c_relat = tk.Button(main_menu, text="Relatório de O.S's",
-                      command=relatoriospdf.relatorio, width=30)
+                      command=relatoriospdf.generate_report, width=30)
     c_relat.grid(row=9, column=1, padx=10, pady=10)
 
     c_eqv = tk.Button(main_menu, text="Equipamentos Cadastrados",
