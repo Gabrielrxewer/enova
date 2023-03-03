@@ -6,8 +6,8 @@ from PyPDF2 import PdfMerger, PdfReader
 import tkinter.messagebox
 
 # Define a janela principal
-root = Tk()
-root.title("Unir PDF's")
+merge = Tk()
+merge.title("Unir PDF's")
 
 # Define a variável de string para o caminho do diretório
 dir_path = StringVar()
@@ -50,30 +50,30 @@ def merge_and_print():
 
 
 def cancel_button():
-    root.destroy()
+    merge.destroy()
 
 
 # Cria o widget do input para o caminho do diretório
-dir_path_label = Label(root, text="Caminho do diretório:")
+dir_path_label = Label(merge, text="Caminho do diretório:")
 dir_path_label.pack()
-dir_path_entry = Entry(root, textvariable=dir_path, width=80)
+dir_path_entry = Entry(merge, textvariable=dir_path, width=80)
 dir_path_entry.pack()
 
 # Cria o botão para selecionar um novo diretório
 dir_path_button = Button(
-    root, text="Selecionar diretório", command=update_dir_path)
+    merge, text="Selecionar diretório", command=update_dir_path)
 dir_path_button.pack()
 
 # Cria o botão para unir os PDFs e imprimir o PDF unificado
 merge_and_print_button = Button(
-    root, text="Unir PDFs e imprimir", command=merge_and_print)
+    merge, text="Unir PDFs e imprimir", command=merge_and_print)
 merge_and_print_button.pack()
 
-cancel_button = Button(root, text="Cancelar", command=cancel_button)
+cancel_button = Button(merge, text="Cancelar", command=cancel_button)
 cancel_button.pack()
 
 # Executa a janela principal
 
 input("Pressione Enter para sair...")
 
-root.mainloop()
+merge.mainloop()

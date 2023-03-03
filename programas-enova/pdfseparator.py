@@ -1,5 +1,6 @@
 import tkinter as tk
 from tkinter import filedialog
+import tkinter.messagebox
 from PyPDF2 import PdfReader, PdfWriter
 import os
 
@@ -45,17 +46,21 @@ try:
         # Salve o arquivo de saída no diretório selecionado pelo usuário
         with open(os.path.join(output_dir, output_filename), 'wb') as out:
             pdf_writer.write(out)
+        
+        tkinter.messagebox.showinfo(
+            "Sucesso!", "Os arquivos PDF foram Unidos com Sucesso!")
 
         page_selection_window.destroy()
+        ok_button.destroy()
+
+        quit()
 
     ok_button = tk.Button(page_selection_window,
                           text="OK", command=on_ok_button)
     ok_button.pack()
-    
-except:
-    print("erro")
 
-finally:
-    ok_button.destroy()
+except:
+    tkinter.messagebox.showerror(
+        "Erro!", "Ocorreu um erro na hora de juntar os PDF's!")
 
 page_selection_window.mainloop()
