@@ -4,7 +4,7 @@
 
 This repository contains several automation projects developed by myself to meet the demands of the Engineering, Quality, and Maintenance departments of Enova.
 
-**Abou Maintance-Software**
+**About Maintance-Software**
 
 The Maintance-Software (v1.9.0) is a test version of a maintenance software developed by Gabriel Roewer Pilger. It is not yet operational in a production environment, but will be integrated into the process once its scope is better aligned.
 
