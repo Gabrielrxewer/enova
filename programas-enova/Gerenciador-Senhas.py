@@ -166,7 +166,7 @@ def main():
 # Cria a janela principal
 janela = Tk()
 janela.title("Minha janela")
-janela.geometry("200x100")
+janela.geometry("200x80")
 
 def cancelar():
     janela.quit()
