@@ -114,7 +114,7 @@ def main():
         senhas = [usuario[1] for usuario in emails]
 
         # Gera o PDF
-        nome_arquivo = "usuarios_senhas.pdf"
+        nome_arquivo = "emails_senhas.pdf"
         c = canvas.Canvas(nome_arquivo, pagesize=letter)
 
         x = 50
