@@ -46,7 +46,7 @@ try:
         # Salve o arquivo de saída no diretório selecionado pelo usuário
         with open(os.path.join(output_dir, output_filename), 'wb') as out:
             pdf_writer.write(out)
-        
+
         tkinter.messagebox.showinfo(
             "Sucesso!", "Os arquivos PDF foram Unidos com Sucesso!")
 

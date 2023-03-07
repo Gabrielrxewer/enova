@@ -1,3 +1,6 @@
+
+#PDF Reader, convert the PDF to image and make it possible to separate the PDF
+
 from tkinter import *
 from tkinter.filedialog import askopenfilename
 from tkinter import filedialog
