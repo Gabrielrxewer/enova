@@ -35,7 +35,8 @@ app.layout = html.Div([
     html.H1('Dashboard - Ordens em aberto - Ordens Fechadas'),
     dcc.Graph(
         id='grafico',
-        figure=px.pie(df_count, values='counts', names='status', color='status', color_discrete_map=cores)
+        figure=px.pie(df_count, values='counts', names='status',
+                      color='status', color_discrete_map=cores)
     )
 ])
 

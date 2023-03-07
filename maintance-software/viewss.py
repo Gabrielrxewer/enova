@@ -16,6 +16,7 @@ res2 = None
 res = None
 icon = "C:\\Users\\inspe\\Desktop\\Qualidade\\Projetos py\\enova.ico"
 
+
 def view_ss():
     view_ss = tk.Tk()
     view_ss.title("Solicitações em Aberto")
@@ -41,7 +42,8 @@ def view_ss():
             'SELECT COD_SS, DESC_SS, RESP_SS, SETOR_SS, EQUIP_SS, INFOS_SS FROM tb_SS')
         rows = c.fetchall()
 
-    descriptions = ['Código', 'Descrição', 'Responsável', 'Setor', 'Equipamento', 'Informações']
+    descriptions = ['Código', 'Descrição', 'Responsável',
+                    'Setor', 'Equipamento', 'Informações']
     widths = [4, 25, 16, 14, 20, 20]
     for j, desc in enumerate(descriptions):
         desc_lab = tk.Label(
@@ -57,4 +59,5 @@ def view_ss():
 
     frame.pack_propagate(False)
 
-    frame.bind("<Configure>", lambda e: canvas.configure(scrollregion=canvas.bbox("all"))) 
+    frame.bind("<Configure>", lambda e: canvas.configure(
+        scrollregion=canvas.bbox("all")))

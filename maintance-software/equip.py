@@ -20,6 +20,7 @@ icon = "C:\\Users\\inspe\\Desktop\\Qualidade\\Projetos py\\enova.ico"
 
 # Função que gera a interface do cadastro de Equipamentos
 
+
 def cad_eqp():
     cad_eq = tk.Toplevel()
     cad_eq.title("Cadastro de Equipamentos")

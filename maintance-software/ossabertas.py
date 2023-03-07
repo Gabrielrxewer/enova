@@ -17,6 +17,7 @@ res2 = None
 res = None
 icon = "C:\\Users\\inspe\\Desktop\\Qualidade\\Projetos py\\enova.ico"
 
+
 def abe_os():
     ab_os = tk.Tk()
     ab_os.title("Ordens em Aberto")
@@ -59,4 +60,5 @@ def abe_os():
 
     frame.pack_propagate(False)
 
-    frame.bind("<Configure>", lambda e: canvas.configure(scrollregion=canvas.bbox("all")))
+    frame.bind("<Configure>", lambda e: canvas.configure(
+        scrollregion=canvas.bbox("all")))

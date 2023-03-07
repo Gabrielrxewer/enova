@@ -18,6 +18,7 @@ res2 = None
 res = None
 icon = "C:\\Users\\inspe\\Desktop\\Qualidade\\Projetos py\\enova.ico"
 
+
 def cad_set():
     cad_se = tk.Toplevel()
     cad_se.title("Cadastro de Setores")

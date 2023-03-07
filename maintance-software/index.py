@@ -8,13 +8,24 @@
 # Bibliotecas necessárias para execução do código
 
 import tkinter as tk
-import oss, ss, report, setores, tiposmanut, pecas, relatoriospdf, funcionarios, equip, eqpcadastrados, viewss
+import oss
+import ss
+import report
+import setores
+import tiposmanut
+import pecas
+import relatoriospdf
+import funcionarios
+import equip
+import eqpcadastrados
+import viewss
 
 # Variaveis de entrada
 
 res2 = None
 res = None
 icon = "C:\\Users\\inspe\\Desktop\\Qualidade\\Projetos py\\enova.ico"
+
 
 def main():
     main_menu = tk.Tk()
@@ -58,7 +69,7 @@ def main():
     c_rep.grid(row=8, column=1, padx=10, pady=10)
 
     c_relat = tk.Button(main_menu, text="Relatório de O.S's",
-                      command=relatoriospdf.generate_report, width=30)
+                        command=relatoriospdf.generate_report, width=30)
     c_relat.grid(row=9, column=1, padx=10, pady=10)
 
     c_eqv = tk.Button(main_menu, text="Equipamentos Cadastrados",
@@ -66,7 +77,7 @@ def main():
     c_eqv.grid(row=10, column=1, padx=10, pady=10)
 
     v_ss = tk.Button(main_menu, text="SS's Cadastradas",
-                      command=viewss.view_ss, width=30)
+                     command=viewss.view_ss, width=30)
     v_ss.grid(row=11, column=1, padx=10, pady=10)
 
     # Função para fechar a interface

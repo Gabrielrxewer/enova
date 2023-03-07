@@ -20,6 +20,7 @@ icon = "C:\\Users\\inspe\\Desktop\\Qualidade\\Projetos py\\enova.ico"
 
 # Função que gera a interface do cadastro de peças
 
+
 def cad_pcs():
     cad_pc = tk.Toplevel()
     cad_pc.title("Cadastro de Peças")

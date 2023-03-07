@@ -19,6 +19,7 @@ res2 = None
 res = None
 icon = "C:\\Users\\inspe\\Desktop\\Qualidade\\Projetos py\\enova.ico"
 
+
 def cad_fun():
     cad_f = tk.Toplevel()
     cad_f.title("Cadastro de Funcionários")

@@ -21,6 +21,7 @@ icon = "C:\\Users\\inspe\\Desktop\\Qualidade\\Projetos py\\enova.ico"
 
 # Função que gera a interface do Cadastro de O.S
 
+
 def cad_os():
     cad_os = tk.Toplevel()
     cad_os.title("Cadastro de O.S")
@@ -154,4 +155,3 @@ def cad_os():
 
     cancel_button = tk.Button(cad_os, text="Cancelar", command=cancelar)
     cancel_button.grid(row=8, column=1, columnspan=4, padx=90, pady=10)
-

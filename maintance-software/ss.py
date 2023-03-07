@@ -21,6 +21,7 @@ icon = "C:\\Users\\inspe\\Desktop\\Qualidade\\Projetos py\\enova.ico"
 
 # Função que gera a interface do cadastro de solicitação de serviço
 
+
 def cad_ss():
     cad_ss = tk.Toplevel()
     cad_ss.title("Cadastro de SS")
@@ -43,7 +44,6 @@ def cad_ss():
                 last_code = 0
             new_code = int(last_code) + 1
             return new_code
-
 
     def save_data():
         cod_ss = ess1.get()
