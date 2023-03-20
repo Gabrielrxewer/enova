@@ -78,7 +78,7 @@ def generate_report():
 
     statuses = ["Open", "Closed"]
     combo = ttk.Combobox(frame, values=statuses)
-    combo.current(0)
+    combo.current(0) 
     combo.pack(side=LEFT)
 
     button = Button(report, text="Generate Report",
