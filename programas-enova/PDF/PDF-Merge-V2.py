@@ -1,42 +1,55 @@
 import os
-from tkinter import *
+import tkinter as tk
 from tkinter import filedialog
-from PyPDF2 import PdfFileMerger
+from PyPDF2 import PdfReader, PdfWriter
 
-# função que é chamada quando o botão "Mesclar" é pressionado
 def merge_pdfs():
-    # exibe a janela de seleção de diretório
-    dir_path = filedialog.askdirectory()
+    # Abrir janela de seleção de diretório
+    input_dir = filedialog.askdirectory()
+    if not input_dir:
+        return
 
-    # lista todos os arquivos no diretório
-    pdf_files = os.listdir(dir_path)
+    # Ler arquivos PDF no diretório selecionado
+    pdf_files = [f for f in os.listdir(input_dir) if f.endswith('.pdf')]
+    if not pdf_files:
+        print('Nenhum arquivo PDF encontrado.')
+        return
 
-    # ordena os arquivos pelo nome
+    # Ordenar arquivos por nome
     pdf_files.sort()
 
-    # inicializa o objeto PdfFileMerger
-    merger = PdfFileMerger()
+    # Criar objeto de escrita PDF
+    pdf_writer = PdfWriter()
 
-    # adiciona cada arquivo PDF ao objeto merger
+    # Adicionar páginas dos arquivos PDF ao objeto de escrita
     for pdf_file in pdf_files:
-        if pdf_file.endswith(".pdf"):
-            pdf_path = os.path.join(dir_path, pdf_file)
-            merger.append(open(pdf_path, 'rb'))
+        pdf_path = os.path.join(input_dir, pdf_file)
+        with open(pdf_path, 'rb') as f:
+            pdf_reader = PdfReader(f)
+            for page_num in range(pdf_reader._get_num_pages()):
+                pdf_writer.add_page(pdf_reader._get_page(page_num))
 
-    # exibe a janela de seleção de arquivo para salvar o arquivo mesclado
-    save_path = filedialog.asksaveasfilename(defaultextension=".pdf")
+    # Abrir janela de salvamento de arquivo
+    output_path = filedialog.asksaveasfilename(defaultextension='.pdf')
+    if not output_path:
+        return
 
-    # cria um novo arquivo PDF com os arquivos mesclados
-    with open(save_path, "wb") as output_file:
-        merger.write(output_file)
+    # Salvar arquivo PDF resultante
+    with open(output_path, 'wb') as f:
+        pdf_writer.write(f)
 
-# cria a janela principal
-root = Tk()
-root.title("PDF Merge")
+    print('PDFs mesclados com sucesso!')
 
-# cria o botão "Mesclar"
-merge_button = Button(root, text="Mesclar", command=merge_pdfs)
+# Criar janela principal
+root = tk.Tk()
+root.title('PDF Merge')
+
+# Adicionar botões
+select_dir_button = tk.Button(root, text='Selecionar diretório', command=merge_pdfs)
+select_dir_button.pack(pady=10)
+
+merge_button = tk.Button(root, text='Mesclar PDFs', command=merge_pdfs)
 merge_button.pack(pady=10)
 
-# inicia a janela principal
+# Iniciar loop principal de eventos da janela
 root.mainloop()
