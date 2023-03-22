@@ -50,3 +50,4 @@ new_inputs = torch.randn(10, input_size)
 
 # Faz previsões usando a rede neural treinada
 predicted = net(new_inputs).argmax(dim=1)
+
