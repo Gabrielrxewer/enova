@@ -8,6 +8,8 @@ def merge_pdfs():
     input_dir = filedialog.askdirectory()
     if not input_dir:
         return
+    else:
+        print("Erro")
 
     # Ler arquivos PDF no diretório selecionado
     pdf_files = [f for f in os.listdir(input_dir) if f.endswith('.pdf')]

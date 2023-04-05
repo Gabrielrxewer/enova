@@ -24,7 +24,7 @@ import viewss
 
 res2 = None
 res = None
-icon = "C:\\Users\\inspe\\Desktop\\Qualidade\\Projetos py\\enova.ico"
+icon = "C:\\Users\\PROJETOS2\\enova-projects\\enova.ico"
 
 
 def main():
