@@ -46,8 +46,6 @@ class ControleRncs(QWidget):
     def __init__(self):
         super().__init__()
 
-        # ...
-
     def atualizar_tabela(self):
         # Limpa a tabela
         self.table_rncs.setRowCount(0)
