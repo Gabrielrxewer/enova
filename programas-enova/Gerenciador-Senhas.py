@@ -5,9 +5,6 @@ from tkinter import messagebox
 from reportlab.pdfgen import canvas
 from reportlab.lib.pagesizes import letter
 
-from tkinter import *
-from tkinter import messagebox
-
 def login():
     # Cria a janela de login
     login_window = Toplevel(janela)
