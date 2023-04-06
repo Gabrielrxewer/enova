@@ -6,8 +6,9 @@ from PyPDF2 import PdfReader, PdfWriter
 from pdfminer.high_level import extract_text
 from pikepdf import Pdf
 
+
 class PDFManager(QMainWindow):
-    def __init__(self): 
+    def __init__(self):
         super().__init__()
 
         self.num_pages = QtWidgets.QLabel()
@@ -51,7 +52,8 @@ class PDFManager(QMainWindow):
 
     def open_file(self):
         # Abre a janela de diálogo para seleção do arquivo PDF
-        filename, _ = QFileDialog.getOpenFileName(self, "Abrir arquivo", "", "PDF Files (*.pdf)")
+        filename, _ = QFileDialog.getOpenFileName(
+            self, "Abrir arquivo", "", "PDF Files (*.pdf)")
         if filename:
             self.filename = filename
             self.pdf = PdfReader(filename)
@@ -64,28 +66,32 @@ class PDFManager(QMainWindow):
 
     def delete_pages(self):
         if not self.filename:
-            QMessageBox.warning(self, "Atenção", "Por favor, selecione um arquivo PDF.")
+            QMessageBox.warning(
+                self, "Atenção", "Por favor, selecione um arquivo PDF.")
             return
 
         # Pergunta ao usuário quais páginas deseja excluir
-        pages, ok_pressed = QInputDialog.getText(self, "Excluir páginas", "Digite as páginas que deseja excluir (exemplo: 1,3,5):")
+        pages, ok_pressed = QInputDialog.getText(
+            self, "Excluir páginas", "Digite as páginas que deseja excluir (exemplo: 1,3,5):")
         if ok_pressed and pages:
             # Converte a entrada do usuário em uma lista de números de página
             try:
                 pages = [int(p) for p in pages.split(",")]
             except ValueError:
-                QMessageBox.warning(self, "Atenção", "Por favor, digite as páginas corretamente (exemplo: 1,3,5).")
+                QMessageBox.warning(
+                    self, "Atenção", "Por favor, digite as páginas corretamente (exemplo: 1,3,5).")
                 return
 
             # Cria um novo arquivo PDF sem as páginas
-            
+
             output = PdfWriter()
             for i in range(self.pdf._get_num_pages()):
                 if i+1 not in pages:
                     output.add_page(self.pdf._get_page(i))
 
             # Salva o novo arquivo PDF com as páginas removidas
-            output_filename, _ = QFileDialog.getSaveFileName(self, "Salvar arquivo", "", "PDF Files (*.pdf)")
+            output_filename, _ = QFileDialog.getSaveFileName(
+                self, "Salvar arquivo", "", "PDF Files (*.pdf)")
             if output_filename:
                 with open(output_filename, "wb") as f:
                     output.write(f)
@@ -100,17 +106,20 @@ class PDFManager(QMainWindow):
 
     def move_pages(self):
         if not self.filename:
-            QMessageBox.warning(self, "Atenção", "Por favor, selecione um arquivo PDF.")
+            QMessageBox.warning(
+                self, "Atenção", "Por favor, selecione um arquivo PDF.")
             return
 
         # Pergunta ao usuário quais páginas deseja mover
-        pages, ok_pressed = QInputDialog.getText(self, "Mover páginas", "Digite as páginas que deseja mover (exemplo: 1,3,5):")
+        pages, ok_pressed = QInputDialog.getText(
+            self, "Mover páginas", "Digite as páginas que deseja mover (exemplo: 1,3,5):")
         if ok_pressed and pages:
             # Converte a entrada do usuário em uma lista de números de página
             try:
                 pages = [int(p) for p in pages.split(",")]
             except ValueError:
-                QMessageBox.warning(self, "Atenção", "Por favor, digite as páginas corretamente (exemplo: 1,3,5).")
+                QMessageBox.warning(
+                    self, "Atenção", "Por favor, digite as páginas corretamente (exemplo: 1,3,5).")
                 return
 
             # Cria uma nova lista de páginas com as páginas selecionadas pelo usuário
@@ -119,7 +128,8 @@ class PDFManager(QMainWindow):
                 selected_pages.append(self.pdf._get_page(page_num - 1))
 
             # Pergunta ao usuário para onde deseja mover as páginas selecionadas
-            destination, ok_pressed = QInputDialog.getInt(self, "Mover páginas", f"Digite o número da página para onde deseja mover as páginas {pages}:")
+            destination, ok_pressed = QInputDialog.getInt(
+                self, "Mover páginas", f"Digite o número da página para onde deseja mover as páginas {pages}:")
             if ok_pressed:
                 # Adiciona as páginas selecionadas na posição desejada
                 output_pdf = PdfWriter()
@@ -134,25 +144,30 @@ class PDFManager(QMainWindow):
                             output_pdf.add_page(page)
 
                 # Salva o novo arquivo PDF com o sufixo "_modificado"
-                output_filename = self.filename.replace(".pdf", "_modificado.pdf")
+                output_filename = self.filename.replace(
+                    ".pdf", "_modificado.pdf")
                 with open(output_filename, "wb") as f:
                     output_pdf.write(f)
 
-                QMessageBox.information(self, "Sucesso", f"Arquivo salvo em {output_filename}.")
+                QMessageBox.information(
+                    self, "Sucesso", f"Arquivo salvo em {output_filename}.")
 
     def insert_pdf(self):
         if not self.filename:
-            QMessageBox.warning(self, "Atenção", "Por favor, selecione um arquivo PDF.")
+            QMessageBox.warning(
+                self, "Atenção", "Por favor, selecione um arquivo PDF.")
             return
 
         # Abre a janela de diálogo para seleção do arquivo PDF a ser inserido
-        filename, _ = QFileDialog.getOpenFileName(self, "Inserir arquivo", "", "PDF Files (*.pdf)")
+        filename, _ = QFileDialog.getOpenFileName(
+            self, "Inserir arquivo", "", "PDF Files (*.pdf)")
         if filename:
             # Abre o arquivo PDF a ser inserido
             pdf_to_insert = PdfReader(filename)
 
             # Pergunta ao usuário a partir de qual página deseja inserir o novo arquivo
-            destination, ok_pressed = QInputDialog.getInt(self, "Inserir arquivo", "Digite o número da página onde deseja inserir o novo arquivo:")
+            destination, ok_pressed = QInputDialog.getInt(
+                self, "Inserir arquivo", "Digite o número da página onde deseja inserir o novo arquivo:")
             if ok_pressed:
                 # Cria um novo arquivo PDF com o arquivo inserido
                 output_pdf = PdfWriter()
@@ -163,15 +178,18 @@ class PDFManager(QMainWindow):
                         output_pdf.add_page(self.pdf._get_page(i))
 
                 # Salva o novo arquivo PDF com o sufixo "_modificado"
-                output_filename = self.filename.replace(".pdf", "_modificado.pdf")
+                output_filename = self.filename.replace(
+                    ".pdf", "_modificado.pdf")
                 with open(output_filename, "wb") as f:
                     output_pdf.write(f)
 
-                QMessageBox.information(self, "Sucesso", f"Arquivo salvo em {output_filename}.")
+                QMessageBox.information(
+                    self, "Sucesso", f"Arquivo salvo em {output_filename}.")
 
     def open_file(self):
         # Abre a janela de diálogo para seleção do arquivo PDF
-        filename, _ = QFileDialog.getOpenFileName(self, "Abrir arquivo", "", "PDF Files (*.pdf)")
+        filename, _ = QFileDialog.getOpenFileName(
+            self, "Abrir arquivo", "", "PDF Files (*.pdf)")
         if filename:
             # Abre o arquivo PDF e atualiza a interface com as informações do arquivo
             self.filename = filename
@@ -197,11 +215,13 @@ class PDFManager(QMainWindow):
 
     def closeEvent(self, event):
         # Exibe uma janela de confirmação ao fechar o programa
-        result = QMessageBox.question(self, "Confirmação", "Deseja realmente sair?", QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
+        result = QMessageBox.question(
+            self, "Confirmação", "Deseja realmente sair?", QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
         if result == QMessageBox.Yes:
             event.accept()
         else:
             event.ignore()
+
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)

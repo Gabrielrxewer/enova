@@ -4,14 +4,15 @@ import fitz
 from pdf import PdfFile
 from PyQt5.QtWidgets import QLabel, QApplication, QMainWindow, QFileDialog, QMessageBox, QPushButton, QListWidget, QAbstractItemView, QListWidgetItem
 
+
 class PDFOrganizer(QMainWindow):
     def __init__(self):
         super().__init__()
         self.setWindowTitle('PDF Organizer')
         self.setGeometry(100, 100, 600, 400)
-        
+
         self.current_file = None
-        
+
         self.initUI()
 
     def initUI(self):
@@ -50,7 +51,8 @@ class PDFOrganizer(QMainWindow):
 
     def load_file(self):
         # função para carregar um arquivo PDF
-        file_path, _ = QFileDialog.getOpenFileName(self, 'Abrir PDF', os.path.expanduser('~'), 'PDF Files (*.pdf)')
+        file_path, _ = QFileDialog.getOpenFileName(
+            self, 'Abrir PDF', os.path.expanduser('~'), 'PDF Files (*.pdf)')
         if file_path:
             self.current_file = fitz.open(file_path)
             self.update_list()
@@ -64,7 +66,8 @@ class PDFOrganizer(QMainWindow):
 
     def add_file(self):
         # função para adicionar um arquivo PDF
-        file_path, _ = QFileDialog.getOpenFileName(self, 'Adicionar arquivo PDF', os.path.expanduser('~'), 'PDF Files (*.pdf)')
+        file_path, _ = QFileDialog.getOpenFileName(
+            self, 'Adicionar arquivo PDF', os.path.expanduser('~'), 'PDF Files (*.pdf)')
         if file_path:
             self.current_file = PdfFile(file_path)
             self.update_list()
@@ -131,18 +134,21 @@ class PDFOrganizer(QMainWindow):
 
     def save_file(self):
         if self.current_file:
-            file_path, _ = QFileDialog.getSaveFileName(self, 'Salvar PDF', os.path.expanduser('~'), 'PDF Files (*.pdf)')
+            file_path, _ = QFileDialog.getSaveFileName(
+                self, 'Salvar PDF', os.path.expanduser('~'), 'PDF Files (*.pdf)')
             if file_path:
                 doc = fitz.open(self.current_file.path)
                 doc.save(file_path)
                 doc.close()
-                QMessageBox.information(self, 'Salvar PDF', 'Arquivo salvo com sucesso!')
+                QMessageBox.information(
+                    self, 'Salvar PDF', 'Arquivo salvo com sucesso!')
         else:
-            QMessageBox.warning(self, 'Salvar PDF', 'Não há arquivo PDF para salvar!')
+            QMessageBox.warning(self, 'Salvar PDF',
+                                'Não há arquivo PDF para salvar!')
+
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
     window = PDFOrganizer()
     window.show()
     sys.exit(app.exec_())
-
