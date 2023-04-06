@@ -1,7 +1,7 @@
 import os
 import tkinter as tk
 from tkinter import filedialog
-from win32com.client import Dispatch
+#from win32com.client import Dispatch
 
 def export_to_dxf(filepath, export_sheet_metal=False):
     swApp = Dispatch("SldWorks.Application")
