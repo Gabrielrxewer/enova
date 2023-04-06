@@ -1,7 +1,6 @@
 import os
 import sys
 import fitz
-from fitz import Document
 from pdf import PdfFile
 from PyQt5.QtWidgets import QLabel, QApplication, QMainWindow, QFileDialog, QMessageBox, QPushButton, QListWidget, QAbstractItemView, QListWidgetItem
 
