@@ -18,6 +18,8 @@ import tkinter.filedialog
 import os
 
 
+#Função que gera o report 
+
 def generate_report():
     def create_pdf(param_os):
         conn = sqlite3.connect('os.db')

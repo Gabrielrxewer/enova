@@ -62,3 +62,7 @@ def abe_os():
 
     frame.bind("<Configure>", lambda e: canvas.configure(
         scrollregion=canvas.bbox("all")))
+
+var = input("Digite a bind solicitada: ")
+
+
